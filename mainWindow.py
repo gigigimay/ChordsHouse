@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from setupUi import setupUi
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -32,6 +32,9 @@ class Ui_MainWindow(object):
         self.labelSongs.setFont(font)
         self.labelSongs.setObjectName("labelSongs")
         self.verticalLayoutL.addWidget(self.labelSongs)
+        self.songListView = QtWidgets.QListView(self.widget)
+        self.songListView.setObjectName("songListView")
+        self.verticalLayoutL.addWidget(self.songListView)
         self.songList = QtWidgets.QListWidget(self.widget)
         self.songList.setObjectName("songList")
         item = QtWidgets.QListWidgetItem()
@@ -180,16 +183,25 @@ class Ui_MainWindow(object):
         self.menuChords.addAction(self.menuTranspose.menuAction())
         self.menuChords.addSeparator()
         self.menuChords.addAction(self.actionChordsChart)
-        self.menuView.addAction(self.actionFontBigger)
         self.menuView.addAction(self.actionFontSmaller)
         self.menuView.addAction(self.actionFontReset)
+        self.menuView.addAction(self.actionFontBigger)
         self.menuView.addAction(self.menuFont_size.menuAction())
+        self.menuView.addSeparator()
         self.menubar.addAction(self.menuSong.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
         self.menubar.addAction(self.menuChords.menuAction())
         self.toolBar.addAction(self.actionNewSong)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.actionTransposeUp)
+        self.toolBar.addAction(self.actionTransposeDown)
+        self.toolBar.addSeparator()
+        self.toolBar.addAction(self.actionFontBigger)
+        self.toolBar.addAction(self.actionFontSmaller)
+        self.toolBar.addSeparator()
 
         self.retranslateUi(MainWindow)
+        setupUi(self)
         self.songTabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -209,16 +221,10 @@ class Ui_MainWindow(object):
         self.comboBox_2.setCurrentText(_translate("MainWindow", "sort by title"))
         self.comboBox_2.setItemText(0, _translate("MainWindow", "sort by title"))
         self.comboBox_2.setItemText(1, _translate("MainWindow", "sort by artist"))
-        self.songTitleLabel.setText(_translate("MainWindow", "Robbers"))
+        self.songTitleLabel.setText(_translate("MainWindow", "Title"))
         self.favButton.setToolTip(_translate("MainWindow", "add to favorite"))
         self.favButton.setText(_translate("MainWindow", "+ Fav"))
-        self.songArtistLabel.setText(_translate("MainWindow", "The 1975"))
-        self.lyricsTextView.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'arial,sans-serif\'; color:#423f42;\">She had a face straight out of magazine<br />God only knows but you\'ll never leave her<br />Her balaclava is starting to chafe<br />And when she gets his gun he\'s begging<br />Babe, stay, stay, stay<br />(Stay, stay, stay)</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'arial,sans-serif\'; color:#423f42;\"><br /></p></body></html>"))
+        self.songArtistLabel.setText(_translate("MainWindow", "Artist"))
         self.songTabWidget.setTabText(self.songTabWidget.indexOf(self.tab), _translate("MainWindow", "Lyrics"))
         self.comboBox.setItemText(0, _translate("MainWindow", "version 1"))
         self.chordsTextView.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -232,7 +238,7 @@ class Ui_MainWindow(object):
         self.menuChords.setTitle(_translate("MainWindow", "Chords"))
         self.menuTranspose.setTitle(_translate("MainWindow", "Transpose"))
         self.menuView.setTitle(_translate("MainWindow", "View"))
-        self.menuFont_size.setTitle(_translate("MainWindow", "gg"))
+        self.menuFont_size.setTitle(_translate("MainWindow", "Font size"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
         self.actionNewSong.setText(_translate("MainWindow", "New song"))
         self.actionEditSong.setText(_translate("MainWindow", "Edit song"))
