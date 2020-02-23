@@ -9,7 +9,7 @@ def create_db_connection():
     return database
 
 
-if __name__ == '__main__':
+def test():
     db = create_db_connection()
     songsCollection = db.get_collection('Songs')
     songs = songsCollection.find({}, {'title': 1, 'artist': 1})
@@ -18,3 +18,7 @@ if __name__ == '__main__':
         print(s['title'])
         print(s['artist'])
         print()
+
+
+if __name__ == '__main__':
+    test()
