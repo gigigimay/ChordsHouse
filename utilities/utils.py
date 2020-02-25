@@ -1,5 +1,9 @@
 import re
-from utilities.transposer import transpose_line
+
+
+def dump(obj):
+  for attr in dir(obj):
+      print("obj.%s = %r" % (attr, getattr(obj, attr)))
 
 
 def parseLyrics(lyrics):
@@ -32,12 +36,3 @@ def parseLyrics(lyrics):
 
         result.append([chordsline, lyricsline])
     return result
-
-
-if __name__ == '__main__':
-    ll = '''[G] She had a [D]face straight out of magazine [Em7]      [Cadd9]
-[G] God only [D]knows but you'll never leave her[Em7]      [Cadd9]'''
-    r = parseLyrics(ll)
-    for chl, lrl in r:
-        print(transpose_line(chl, 2))
-        print(lrl)

@@ -1,11 +1,11 @@
-from connectDb import create_db_connection
+from utilities.connectDb import create_db_connection
 
 
 def get_songs_list():
     db = create_db_connection()
     songsCollection = db.get_collection('Songs')
     songs = []
-    result = songsCollection.find({}, {'title': 1, 'artist': 1})
+    result = songsCollection.find({})
     for r in result:
         songs.append(r)
     return songs
