@@ -1,5 +1,5 @@
 import constants as const
-from utilities.ui import renderSongItems, setCurrentSong, updateSongDetail, refreshSongList, initLyricsWindow, initDeleteDialog
+from utilities.ui import renderSongItems, setCurrentSong, updateSongDetail, refreshSongList, initLyricsWindow, initDeleteSongDialog, initChordsWindow, initDeleteChordsDialog, setToolBar
 
 
 def onSearch(ui):
@@ -24,12 +24,7 @@ def onSongChanged(ui):
 
 def onSongTabChanged(ui):
     def handleChange(i: int):
-        if i:
-            ui.lyricsToolBar.hide()
-            ui.chordsToolBar.show()
-        else:
-            ui.chordsToolBar.hide()
-            ui.lyricsToolBar.show()
+        setToolBar(ui, i)
     return handleChange
 
 
@@ -41,7 +36,7 @@ def onActionFontSize(ui, value):
             updateSongDetail(ui)
     return handleChange
 
-
+# --------------------------------- song CRUD ---------------------------------
 def onActionAddSong(window):
     def handleChange():
         initLyricsWindow(window.lyricsWindow)
@@ -58,7 +53,28 @@ def onActionEditSong(window):
 
 def onActionDeleteSong(window):
     def handleChange():
-        initDeleteDialog(window.confirmDialog)
+        initDeleteSongDialog(window.confirmDialog)
+        window.confirmDialog.show()
+    return handleChange
+
+# --------------------------------- chords CRUD ---------------------------------
+def onActionAddChord(window):
+    def handleChange():
+        initChordsWindow(window.chordsWindow)
+        window.chordsWindow.show()
+    return handleChange
+
+
+def onActionEditChords(window):
+    def handleChange():
+        initChordsWindow(window.chordsWindow, song=window.ui.currentChords)
+        window.chordsWindow.show()
+    return handleChange
+
+
+def onActionDeleteChords(window):
+    def handleChange():
+        initDeleteChordsDialog(window.confirmDialog)
         window.confirmDialog.show()
     return handleChange
 

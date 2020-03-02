@@ -1,8 +1,8 @@
 import constants as const
 from PyQt5 import QtWidgets
 from service import get_songs_list
-from utilities.utils import getSongLabel
-
+from utilities.utils import getSongLabel, getInitialChords
+from constants import ARTIST_PLACEHOLDER
 
 def renderLyrics(ui, text):
     lines = text.splitlines()
@@ -38,7 +38,7 @@ def renderLyrics(ui, text):
 def updateSongDetail(ui):
     song = ui.currentSong
     ui.songTitleLabel.setText(song['title'])
-    ui.songArtistLabel.setText(song['artist'] or '(Unknown Artist)')
+    ui.songArtistLabel.setText(song['artist'] or ARTIST_PLACEHOLDER)
     ui.lyricsTextView.setHtml(renderLyrics(ui, song['lyrics']))
 
 
@@ -80,6 +80,20 @@ def refreshSongList(ui):
     # TODO: clear search inputs OR do the search again
 
 
+def setToolBar(ui, i):
+    if i:
+        ui.lyricsToolBar.hide()
+        ui.chordsToolBar.show()
+    else:
+        ui.chordsToolBar.hide()
+        ui.lyricsToolBar.show()
+
+
+def setCurrentTab(ui, index):
+    ui.songTabWidget.setCurrentIndex(index)
+    setToolBar(ui, index)
+
+
 def initLyricsWindow(window, song=None):
     ui = window.ui
     ui.titleInput.setFocus()
@@ -93,7 +107,6 @@ def initLyricsWindow(window, song=None):
         ui.dialogTitleLabel.setText('New Song')
     else:
         ui.mode = 'edit'
-        ui.titleInput.setFocus()
         ui.titleInput.setText(song['title'])
         ui.artistInput.setText(song['artist'])
         ui.lyricsInput.setPlainText(song['lyrics'])
@@ -101,8 +114,41 @@ def initLyricsWindow(window, song=None):
         ui.dialogTitleLabel.setText('Edit Song')
 
 
-def initDeleteDialog(window):
+def initChordsWindow(window, chords=None):
+    ui = window.ui
+    song = window.mainWindow.ui.currentSong
+    ui.chordsNameInput.setFocus()
+    ui.currentChords = chords
+    ui.currentSong = song
+    ui.songTitleLabel.setText(song['title'])
+    ui.songArtistLabel.setText(song['artist'])
+    if not chords:
+        ui.mode = 'add'
+        ui.chordsNameInput.setText('')
+        initialChords = getInitialChords(song['lyrics'])
+        ui.lyricsInput.setPlainText(initialChords)
+        window.setWindowTitle('New Chords')
+        ui.dialogTitleLabel.setText('New Chords')
+    else:
+        ui.mode = 'edit'
+        ui.titleInput.setFocus()
+        ui.chordsNameInput.setText(chords['title'])
+        ui.lyricsInput.setPlainText(chords['body'])
+
+        window.setWindowTitle('Edit Chords')
+        ui.dialogTitleLabel.setText('Edit Chords')
+
+
+def initDeleteSongDialog(window):
     ui = window.ui
     ui.mode = 'song'
     label = getSongLabel(window.mainWindow.ui.currentSong)
     ui.label.setText(f'Confirm Deletion?\n{label}')
+
+
+def initDeleteChordsDialog(window):
+    ui = window.ui
+    ui.mode = 'chords'
+    label = getSongLabel(window.mainWindow.ui.currentSong)
+    chordName = window.mainWindow.ui.currentChords['name']
+    ui.label.setText(f'Confirm Deletion?\n{chordName}\n{label}')

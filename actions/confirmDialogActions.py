@@ -2,7 +2,7 @@ from service import delete_song
 import utilities
 
 
-def onDeleteSong(window):
+def onDelete(window):
     ui = window.ui
 
     def handleChange():

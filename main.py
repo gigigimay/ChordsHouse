@@ -32,7 +32,7 @@ class ChordsWindow(QWidget):
         self.mainWindow = mainWindow
         self.ui = Ui_ChordsWindow()
         self.ui.setupUi(self)
-        setupUi.lyricsWindow(self)
+        setupUi.chordsWindow(self)
 
 
 class ConfirmDialog(QWidget):

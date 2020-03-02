@@ -1,5 +1,6 @@
 import re
 from bson.objectid import ObjectId
+from constants import ARTIST_PLACEHOLDER
 
 
 def createObjId(id: str):
@@ -12,7 +13,12 @@ def dump(obj):
 
 
 def getSongLabel(song):
-    return f'{song["title"]} - {song["artist"] or "(Unknown Artist)"}'
+    return f'{song["title"]} - {song["artist"] or ARTIST_PLACEHOLDER}'
+
+
+def getInitialChords(lyrics: str):
+    lines = lyrics.splitlines()
+    return '\n'.join([f'\n{line}' for line in lines])
 
 
 def parseLyrics(lyrics):
