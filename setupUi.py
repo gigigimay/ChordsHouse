@@ -1,25 +1,47 @@
 from utilities.ui import renderSongItems, setCurrentSong
-from utilities.actions import onSearch, onSongChanged, onActionFontSize, onActionAddSong, onAddSongAccept, onActionRefresh
+from actions import mainActions, lyricsActions, chordsActions, confirmDialogActions
 from service import get_songs_list
 
-def mainWindow(self):
+
+def mainWindow(window):
+    ui = window.ui
     # init values
     allSongs = get_songs_list()
-    self.allSongs = allSongs
-    self.lyricsFontSize = 14
+    ui.allSongs = allSongs
+    ui.lyricsFontSize = 13
 
     # init ui
-    setCurrentSong(self, allSongs[0])
-    renderSongItems(self, self.allSongs)
+    setCurrentSong(ui, allSongs[0])
+    renderSongItems(ui, ui.allSongs)
+    ui.chordsToolBar.hide()
 
     # signal handling
-    self.searchInput.textChanged.connect(onSearch(self))
-    self.songList.currentItemChanged.connect(onSongChanged(self))
-    self.actionFontBigger.triggered.connect(onActionFontSize(self, 3))
-    self.actionFontSmaller.triggered.connect(onActionFontSize(self, -3))
-    self.actionNewSong.triggered.connect(onActionAddSong(self))
-    self.actionRefresh.triggered.connect(onActionRefresh(self))
+    ui.searchInput.textChanged.connect(mainActions.onSearch(ui))
+    ui.songList.currentItemChanged.connect(mainActions.onSongChanged(ui))
+    ui.songTabWidget.currentChanged.connect(mainActions.onSongTabChanged(ui))
+
+    # action handling
+    ui.actionNewSong.triggered.connect(mainActions.onActionAddSong(window))
+    ui.actionEditSong.triggered.connect(mainActions.onActionEditSong(window))
+    ui.actionDeleteSong.triggered.connect(mainActions.onActionDeleteSong(window))
+    ui.actionFontBigger.triggered.connect(mainActions.onActionFontSize(ui, 3))
+    ui.actionFontSmaller.triggered.connect(mainActions.onActionFontSize(ui, -3))
+    ui.actionRefresh.triggered.connect(mainActions.onActionRefresh(ui))
 
 
-def addSongWindow(self):
-    self.buttonBox.accepted.connect(onAddSongAccept(self))
+def lyricsWindow(window):
+    ui = window.ui
+    ui.buttonBox.accepted.connect(lyricsActions.onAccept(window))
+    ui.buttonBox.rejected.connect(lyricsActions.onCancel(window))
+
+
+def chordsWindow(window):
+    ui = window.ui
+    ui.buttonBox.accepted.connect(chordsActions.onAccept(window))
+    ui.buttonBox.rejected.connect(chordsActions.onCancel(window))
+
+
+def confirmDialog(window):
+    ui = window.ui
+    ui.buttonBox.rejected.connect(confirmDialogActions.onCancel(window))
+    ui.buttonBox.accepted.connect(confirmDialogActions.onDeleteSong(window))

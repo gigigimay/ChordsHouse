@@ -1,9 +1,18 @@
 import re
+from bson.objectid import ObjectId
+
+
+def createObjId(id: str):
+    return ObjectId(id)
 
 
 def dump(obj):
   for attr in dir(obj):
       print("obj.%s = %r" % (attr, getattr(obj, attr)))
+
+
+def getSongLabel(song):
+    return f'{song["title"]} - {song["artist"] or "(Unknown Artist)"}'
 
 
 def parseLyrics(lyrics):
