@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ChordsHouse</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="opaqueResize">
+       <bool>true</bool>
+      </property>
+      <property name="handleWidth">
+       <number>7</number>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <layout class="QVBoxLayout" name="verticalLayoutL">
+        <item>
+         <widget class="QLabel" name="labelSongs_2">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Songs</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="songList"/>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="searchInput">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Type to search...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="favOnlyCheckbox">
+          <property name="text">
+           <string>Favorites Songs Only</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="sortByComboBox">
+          <property name="currentText">
+           <string>sort by title</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>sort by title</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>sort by artist</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <layout class="QVBoxLayout" name="verticalLayoutR" stretch="0,0">
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="horizontalSpacing">
+           <number>-1</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="songTitleLabel">
+            <property name="font">
+             <font>
+              <pointsize>24</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Song Title</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="favButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>add to favorite</string>
+            </property>
+            <property name="text">
+             <string>+ Fav</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="songArtistLabel">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Artist</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTabWidget" name="songTabWidget">
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="lyricsTab">
+           <attribute name="title">
+            <string>Lyrics</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="leftMargin">
+             <number>4</number>
+            </property>
+            <property name="topMargin">
+             <number>4</number>
+            </property>
+            <property name="rightMargin">
+             <number>4</number>
+            </property>
+            <property name="bottomMargin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QTextBrowser" name="lyricsTextView">
+              <property name="font">
+               <font>
+                <family>Overpass Mono</family>
+               </font>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Overpass Mono'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="chordTab">
+           <attribute name="title">
+            <string>Chords</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <property name="leftMargin">
+             <number>4</number>
+            </property>
+            <property name="topMargin">
+             <number>4</number>
+            </property>
+            <property name="rightMargin">
+             <number>4</number>
+            </property>
+            <property name="bottomMargin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QComboBox" name="chordComboBox">
+              <item>
+               <property name="text">
+                <string>version 1</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTextBrowser" name="chordsTextView">
+              <property name="font">
+               <font>
+                <family>Overpass Mono</family>
+               </font>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Overpass Mono'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="addChordButton">
+              <property name="text">
+               <string>Add Chord</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSong">
+    <property name="title">
+     <string>Song</string>
+    </property>
+    <addaction name="actionNewSong"/>
+    <addaction name="actionEditSong"/>
+    <addaction name="actionDeleteSong"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport_Song"/>
+    <addaction name="separator"/>
+    <addaction name="actionRefresh"/>
+   </widget>
+   <widget class="QMenu" name="menuChords">
+    <property name="title">
+     <string>Chords</string>
+    </property>
+    <widget class="QMenu" name="menuTranspose">
+     <property name="title">
+      <string>Transpose</string>
+     </property>
+     <addaction name="actionTransposeUp"/>
+     <addaction name="actionTransposeDown"/>
+    </widget>
+    <addaction name="actionAddChords"/>
+    <addaction name="actionEditChords"/>
+    <addaction name="actionDeleteChords"/>
+    <addaction name="actionDuplicateChords"/>
+    <addaction name="separator"/>
+    <addaction name="menuTranspose"/>
+    <addaction name="actionTransposeReset"/>
+    <addaction name="separator"/>
+    <addaction name="actionChordsChart"/>
+   </widget>
+   <widget class="QMenu" name="menuDisplay">
+    <property name="title">
+     <string>Display</string>
+    </property>
+    <widget class="QMenu" name="menuFont_Size">
+     <property name="title">
+      <string>Font Size</string>
+     </property>
+     <addaction name="actionFontBigger"/>
+     <addaction name="actionFontSmaller"/>
+     <addaction name="actionFontReset"/>
+    </widget>
+    <addaction name="menuFont_Size"/>
+    <addaction name="actionStriped_Text"/>
+   </widget>
+   <widget class="QMenu" name="menuAccount">
+    <property name="title">
+     <string>Account</string>
+    </property>
+    <addaction name="actionDetail"/>
+    <addaction name="actionClear_Favorites"/>
+    <addaction name="separator"/>
+    <addaction name="actionSign_In"/>
+    <addaction name="actionSign_Out"/>
+    <addaction name="actionSign_Up"/>
+   </widget>
+   <addaction name="menuSong"/>
+   <addaction name="menuChords"/>
+   <addaction name="menuDisplay"/>
+   <addaction name="menuAccount"/>
+  </widget>
+  <widget class="QToolBar" name="lyricsToolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionRefresh"/>
+   <addaction name="separator"/>
+   <addaction name="actionNewSong"/>
+   <addaction name="actionEditSong"/>
+   <addaction name="actionDeleteSong"/>
+   <addaction name="separator"/>
+   <addaction name="actionFontBigger"/>
+   <addaction name="actionFontSmaller"/>
+  </widget>
+  <widget class="QToolBar" name="chordsToolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="actionRefresh"/>
+   <addaction name="separator"/>
+   <addaction name="actionAddChords"/>
+   <addaction name="actionEditChords"/>
+   <addaction name="actionDeleteChords"/>
+   <addaction name="actionDuplicateChords"/>
+   <addaction name="separator"/>
+   <addaction name="actionFontBigger"/>
+   <addaction name="actionFontSmaller"/>
+   <addaction name="separator"/>
+   <addaction name="actionTransposeUp"/>
+   <addaction name="actionTransposeReset"/>
+   <addaction name="actionTransposeDown"/>
+   <addaction name="separator"/>
+   <addaction name="actionChordsChart"/>
+  </widget>
+  <action name="actionNewSong">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/add.png</normaloff>../assets/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Song</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionEditSong">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/edit.png</normaloff>../assets/edit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit Song</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+E</string>
+   </property>
+  </action>
+  <action name="actionDeleteSong">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/delete.png</normaloff>../assets/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete Song</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Backspace</string>
+   </property>
+  </action>
+  <action name="actionAddChords">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/addChords.png</normaloff>../assets/addChords.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Chords</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionEditChords">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/editChords.png</normaloff>../assets/editChords.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit Chords</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionDeleteChords">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/deleteChords.png</normaloff>../assets/deleteChords.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete Chords</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Backspace</string>
+   </property>
+  </action>
+  <action name="actionChordsChart">
+   <property name="text">
+    <string>Chords Chart</string>
+   </property>
+  </action>
+  <action name="actionTransposeUp">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/caret-up.png</normaloff>../assets/caret-up.png</iconset>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+]</string>
+   </property>
+  </action>
+  <action name="actionTransposeDown">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/caret-down.png</normaloff>../assets/caret-down.png</iconset>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+[</string>
+   </property>
+  </action>
+  <action name="actionTransposeReset">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+   <property name="iconText">
+    <string>0</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionDuplicateChords">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/dupChords.png</normaloff>../assets/dupChords.png</iconset>
+   </property>
+   <property name="text">
+    <string>Duplicate Chords</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionFontBigger">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/increaseFont.png</normaloff>../assets/increaseFont.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bigger</string>
+   </property>
+   <property name="toolTip">
+    <string>Increase Font Size</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+.</string>
+   </property>
+  </action>
+  <action name="actionFontSmaller">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/decreaseFont.png</normaloff>../assets/decreaseFont.png</iconset>
+   </property>
+   <property name="text">
+    <string>Smaller</string>
+   </property>
+   <property name="toolTip">
+    <string>Decrease Font Size</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+,</string>
+   </property>
+  </action>
+  <action name="actionFontReset">
+   <property name="text">
+    <string>Default</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset font size to default</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+/</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset>
+     <normaloff>../assets/refresh.png</normaloff>../assets/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+   <property name="iconText">
+    <string>Refresh</string>
+   </property>
+   <property name="font">
+    <font/>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionExport_Song">
+   <property name="text">
+    <string>Export Song...</string>
+   </property>
+  </action>
+  <action name="actionDetail">
+   <property name="text">
+    <string>Profile</string>
+   </property>
+  </action>
+  <action name="actionClear_Favorites">
+   <property name="text">
+    <string>Clear Favorites</string>
+   </property>
+  </action>
+  <action name="actionSign_Out">
+   <property name="text">
+    <string>Sign Out</string>
+   </property>
+   <property name="toolTip">
+    <string>Sign Out</string>
+   </property>
+  </action>
+  <action name="actionSign_In">
+   <property name="text">
+    <string>Sign In</string>
+   </property>
+  </action>
+  <action name="actionSign_Up">
+   <property name="text">
+    <string>Sign Up</string>
+   </property>
+  </action>
+  <action name="actionStriped_Text">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Striped Text</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>songList</tabstop>
+  <tabstop>searchInput</tabstop>
+  <tabstop>favOnlyCheckbox</tabstop>
+  <tabstop>sortByComboBox</tabstop>
+  <tabstop>favButton</tabstop>
+  <tabstop>songTabWidget</tabstop>
+  <tabstop>lyricsTextView</tabstop>
+  <tabstop>chordComboBox</tabstop>
+  <tabstop>chordsTextView</tabstop>
+  <tabstop>addChordButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
