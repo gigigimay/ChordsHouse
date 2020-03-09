@@ -1,64 +1,50 @@
 import constants as const
 from PyQt5 import QtWidgets
-from service import get_songs_list
-from utilities.utils import getSongLabel, getInitialChords
-from constants import ARTIST_PLACEHOLDER
-
-def renderLyrics(ui, text):
-    lines = text.splitlines()
-    result = []
-    i = 0
-    for line in lines:
-        if line:
-            div = f'<div class="{"odd" if i % 2 else "even"}">{line}</div>'
-            i += 1
-        else:
-            div = '<div> </div>'
-            i = 0
-        result.append(div)
-    newText = ''.join(result)
-    size = ui.lyricsFontSize
-    style = f'''body {{
-            white-space: pre-wrap;
-            font-size:{size}pt;
-            font-family:'Overpass Mono';
-            line-height: 80%;
-        }}
-        .even, .odd {{
-            margin: {size / 2}px 0;
-        }}
-        .odd {{
-            background-color: #f3f3f3;
-        }}'''
-    return f'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-        <html><head><style type="text/css">{style}</style></head>
-        <body>{newText}</body></html>'''
+from service import get_songs_list, get_song_chords_list
+from utilities.utils import getCurrentChordsData, setActionsDisabled, setWidgetsVisible
+from utilities.text import getSongLabel, getInitialChords, getHtmlLyrics, addCopySuffix, getHtmlChords
+from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
 
 
-def updateSongDetail(ui):
-    song = ui.currentSong
-    ui.songTitleLabel.setText(song['title'])
-    ui.songArtistLabel.setText(song['artist'] or ARTIST_PLACEHOLDER)
-    ui.lyricsTextView.setHtml(renderLyrics(ui, song['lyrics']))
+def setToolBar(ui, i):
+    # must hide old toolbar first, to prevent flashy ui
+    if i:
+        ui.lyricsToolBar.setVisible(False)
+        ui.chordsToolBar.setVisible(True)
+    else:
+        ui.chordsToolBar.setVisible(False)
+        ui.lyricsToolBar.setVisible(True)
+
+
+def setCurrentTab(ui, index):
+    ui.songTabWidget.setCurrentIndex(index)
+    setToolBar(ui, index)
 
 
 def setCurrentSong(ui, song):
+    # song
     ui.currentSong = song
-    updateSongDetail(ui)
+    renderSongDetail(ui)
+
+    # chords
+    chords = get_song_chords_list(song['_id'])
+    index = 0 if chords else -1
+    ui.allCurrentSongChords = chords
+    ui.currentChordsIndex = index
+    updateChordsUi(ui)
+
+
+def setCurrentSongListIndex(ui, index):
+    ui.songList.setCurrentRow(index)
 
 
 def renderSongItems(ui, songs):
     ui.songList.clear()
-    for i, song in enumerate(songs):
+    for song in songs:
         item = QtWidgets.QListWidgetItem()
         item.setText(getSongLabel(song))
         item.setData(const.SONG_ITEM_DATA_INDEX, song)
         ui.songList.addItem(item)
-
-
-def setAllSongs(ui, songs):
-    ui.allSongs = songs
-    renderSongItems(ui, ui.allSongs)
 
 
 def refreshSongList(ui):
@@ -67,9 +53,9 @@ def refreshSongList(ui):
     ui.allSongs = newAllSongs
     renderSongItems(ui, ui.allSongs)
 
-    # refresh current song
-    prevSongId = ui.currentSong['_id']
-    matches = list(filter(lambda song: song['_id'] == prevSongId, newAllSongs))
+    ### refresh current song
+    currentSongId = ui.currentSong['_id']
+    matches = list(filter(lambda song: song['_id'] == currentSongId, newAllSongs))
     # refresh the song detail
     newCurrentSong = matches[0] if matches else newAllSongs[0]
     setCurrentSong(ui, newCurrentSong)
@@ -80,20 +66,68 @@ def refreshSongList(ui):
     # TODO: clear search inputs OR do the search again
 
 
-def setToolBar(ui, i):
-    if i:
-        ui.lyricsToolBar.hide()
-        ui.chordsToolBar.show()
-    else:
-        ui.chordsToolBar.hide()
-        ui.lyricsToolBar.show()
+def setCurrentChordsIndex(ui, index):
+    ui.currentChordsIndex = index
+    renderChordsBrowser(ui)
 
 
-def setCurrentTab(ui, index):
-    ui.songTabWidget.setCurrentIndex(index)
-    setToolBar(ui, index)
+def renderSongDetail(ui):
+    song = ui.currentSong
+    lyrics = getHtmlLyrics(song['lyrics'], ui.lyricsFontSize)
+    ui.songTitleLabel.setText(song['title'])
+    ui.songArtistLabel.setText(song['artist'] or ARTIST_PLACEHOLDER)
+    ui.lyricsTextView.setHtml(lyrics)
 
 
+# ---------------------------- chords ----------------------------
+def refreshChordsData(ui, newIndex=None):
+    song = ui.currentSong
+    chords = get_song_chords_list(song['_id'])
+    index = 0 if chords else -1
+    ui.allCurrentSongChords = chords
+    ui.currentChordsIndex = newIndex or index
+    updateChordsUi(ui)
+
+
+def updateChordsUi(ui):
+    index = ui.currentChordsIndex
+    chords = ui.allCurrentSongChords
+    setChordsDisabled(ui, not chords)
+    dropdown: QtWidgets.QComboBox = ui.chordComboBox
+
+    # these lines are causing over rerendering/
+    dropdown.clear()
+    if chords:
+        for c in chords:
+            dropdown.addItem(c['title'] or CHORDS_PLACEHOLDER)
+        dropdown.setCurrentIndex(index)
+        renderChordsBrowser(ui)
+
+
+def setChordsDisabled(ui, disabled):
+    actions = [
+        ui.actionEditChords,
+        ui.actionDeleteChords,
+        ui.actionChordsChart,
+        ui.actionTransposeUp,
+        ui.actionTransposeDown,
+        ui.actionTransposeReset,
+        ui.actionDuplicateChords,
+    ]
+    haveChordsWidgets = [ui.chordComboBox, ui.chordsTextView]
+    dontHaveChordsWidgets = [ui.addChordButton]
+    setActionsDisabled(disabled, actions)
+    setWidgetsVisible(not disabled, haveChordsWidgets)
+    setWidgetsVisible(disabled, dontHaveChordsWidgets)
+
+
+def renderChordsBrowser(ui):
+    chords = getCurrentChordsData(ui)
+    if chords:
+        body = getHtmlChords(chords['body'], ui.lyricsFontSize, ui.transpose)
+        ui.chordsTextView.setHtml(body)
+
+# ---------------------------- ui init ----------------------------
 def initLyricsWindow(window, song=None):
     ui = window.ui
     ui.titleInput.setFocus()
@@ -114,9 +148,10 @@ def initLyricsWindow(window, song=None):
         ui.dialogTitleLabel.setText('Edit Song')
 
 
-def initChordsWindow(window, chords=None):
+def initChordsWindow(window, chords=None, duplicate=False):
     ui = window.ui
     song = window.mainWindow.ui.currentSong
+
     ui.chordsNameInput.setFocus()
     ui.currentChords = chords
     ui.currentSong = song
@@ -124,19 +159,24 @@ def initChordsWindow(window, chords=None):
     ui.songArtistLabel.setText(song['artist'])
     if not chords:
         ui.mode = 'add'
-        ui.chordsNameInput.setText('')
-        initialChords = getInitialChords(song['lyrics'])
-        ui.lyricsInput.setPlainText(initialChords)
-        window.setWindowTitle('New Chords')
-        ui.dialogTitleLabel.setText('New Chords')
+        windowTitle = 'New Chords'
+        chordsTitle = ''
+        chordsBody = getInitialChords(song['lyrics'])
+    elif duplicate:
+        allChordsName = [c['title'] or CHORDS_PLACEHOLDER for c in window.mainWindow.ui.allCurrentSongChords]
+        ui.mode = 'add'
+        windowTitle = 'Duplicate Chords'
+        chordsTitle = addCopySuffix(f"{chords['title'] or CHORDS_PLACEHOLDER}", allChordsName)
+        chordsBody = chords['body']
     else:
         ui.mode = 'edit'
-        ui.titleInput.setFocus()
-        ui.chordsNameInput.setText(chords['title'])
-        ui.lyricsInput.setPlainText(chords['body'])
-
-        window.setWindowTitle('Edit Chords')
-        ui.dialogTitleLabel.setText('Edit Chords')
+        windowTitle = 'Edit Chords'
+        chordsTitle = chords['title']
+        chordsBody = chords['body']
+    ui.chordsNameInput.setText(chordsTitle)
+    ui.lyricsInput.setPlainText(chordsBody)
+    window.setWindowTitle(windowTitle)
+    ui.dialogTitleLabel.setText(windowTitle)
 
 
 def initDeleteSongDialog(window):
@@ -150,5 +190,6 @@ def initDeleteChordsDialog(window):
     ui = window.ui
     ui.mode = 'chords'
     label = getSongLabel(window.mainWindow.ui.currentSong)
-    chordName = window.mainWindow.ui.currentChords['name']
-    ui.label.setText(f'Confirm Deletion?\n{chordName}\n{label}')
+    currentChords = getCurrentChordsData(window.mainWindow.ui)
+    chordName = currentChords['title'] or CHORDS_PLACEHOLDER
+    ui.label.setText(f'Confirm Deletion?\n"{chordName}"\n{label}')

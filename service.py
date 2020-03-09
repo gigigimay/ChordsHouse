@@ -5,18 +5,19 @@ _db = create_db_connection()
 _songsCollection = _db.get_collection('Songs')
 _chordsCollection = _db.get_collection('Chords')
 
+
 def get_songs_list():
     result = list(_songsCollection.find({}))
     return result
 
 
 def get_song_data(songId):
-    result = _songsCollection.find_one({ '_id': songId })
+    result = _songsCollection.find_one({'_id': songId})
     return result
 
 
-def get_chords_list():
-    result = list(_chordsCollection.find({}))
+def get_song_chords_list(songId):
+    result = list(_chordsCollection.find({'songId': songId}))
     return result
 
 
@@ -45,8 +46,8 @@ def add_chords(**chord):
 
 def edit_chords(chordsId, **update):
     result = _chordsCollection.update_one({'_id': ObjectId(chordsId)}, {'$set': update}, upsert=True)
-    print(f'modified_count: {result.modified_count}')
-    print(f'modified_count: {result.upserted_id}')
+    print(f'edit_chords - modified_count: {result.modified_count}')
+    print(f'edit_chords - upserted_id: {result.upserted_id}')
 
 
 def delete_chords(chordsId):

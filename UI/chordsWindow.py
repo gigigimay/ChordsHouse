@@ -69,7 +69,7 @@ class Ui_ChordsWindow(object):
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.importButton)
         self.buttonBox = QtWidgets.QDialogButtonBox(ChordsWindow)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Help|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setCenterButtons(False)
         self.buttonBox.setObjectName("buttonBox")
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.buttonBox)

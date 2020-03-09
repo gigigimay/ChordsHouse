@@ -1,9 +1,10 @@
-from utilities.ui import refreshSongList
+from utilities.ui import refreshSongList, setCurrentSong, setCurrentSongListIndex
 from service import add_song, edit_song
 
 
 def onAccept(window):
     ui = window.ui
+    mainUi = window.mainWindow.ui
 
     def handleChange():
         title = ui.titleInput.text()
@@ -11,11 +12,22 @@ def onAccept(window):
         lyrics = ui.lyricsInput.toPlainText()
         if title and lyrics:
             if ui.mode == 'add':
-                add_song(title=title, artist=artist, lyrics=lyrics)
+                id = add_song(title=title, artist=artist, lyrics=lyrics)
+                refreshSongList(mainUi)
+                # grant selection to new song
+                def fil(s):
+                    print(s['_id'])
+                    return s['_id'] == id
+                newSong = list(filter(fil, mainUi.allSongs))[0]
+                newIndex = mainUi.allSongs.index(newSong)
+                print(f'newIndex: {newIndex}')
+                setCurrentSong(mainUi, newSong)
+                setCurrentSongListIndex(mainUi, newIndex)
+
             elif ui.mode == 'edit':
                 currentSongId = ui.currentSong['_id']
                 edit_song(currentSongId, title=title, artist=artist, lyrics=lyrics)
-            refreshSongList(window.mainWindow.ui)
+                refreshSongList(mainUi)
             window.close()
         else:
             print('please fill all required data')

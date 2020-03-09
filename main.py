@@ -5,8 +5,15 @@ from UI.mainWindow import Ui_MainWindow
 from UI.lyricsWindow import Ui_LyricsWindow
 from UI.chordsWindow import Ui_ChordsWindow
 from UI.confirmDialog import Ui_confirmDialog
+from UI.chordsHelpDialog import Ui_chordsHelpDialog
+
 
 class MainWindow(QMainWindow):
+    allSongs = []
+    currentSong = None
+    allCurrentChords = []
+    currentChordsIndex = -1
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -32,6 +39,7 @@ class ChordsWindow(QWidget):
         self.mainWindow = mainWindow
         self.ui = Ui_ChordsWindow()
         self.ui.setupUi(self)
+        self.helpWindow = ChordsHelpDialog()
         setupUi.chordsWindow(self)
 
 
@@ -44,11 +52,18 @@ class ConfirmDialog(QWidget):
         setupUi.confirmDialog(self)
 
 
+class ChordsHelpDialog(QWidget):
+    def __init__(self):
+        super(ChordsHelpDialog, self).__init__()
+        self.ui = Ui_chordsHelpDialog()
+        self.ui.setupUi(self)
+        setupUi.chordsHelpDialog(self)
+
+
 def main():
     app = QApplication(sys.argv)
     mainWindow = MainWindow()
     mainWindow.show()
-
     sys.exit(app.exec_())
 
 
