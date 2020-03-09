@@ -43,13 +43,6 @@ def onAccept(window):
     return handleChange
 
 
-def onCancel(window):
-    def handleChange():
-        window.close()
-
-    return handleChange
-
-
 def onImport(window: LyricsWindow):
     ui = window.ui
 

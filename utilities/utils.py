@@ -16,6 +16,11 @@ def setActionsDisabled(bool, actions):
         a.setDisabled(bool)
 
 
+def setActionsVisible(bool, actions):
+    for a in actions:
+        a.setVisible(bool)
+
+
 def setWidgetsVisible(bool, widgets):
     for w in widgets:
         w.show() if bool else w.hide()

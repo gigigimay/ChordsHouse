@@ -1,59 +1,81 @@
-from utilities.ui import refreshSongList, refreshChordsData, setCurrentTab
-from utilities.utils import getOpenFileContent
-from utilities.text import extractChordsFromText
-from service import add_chords, edit_chords
-from main import ChordsWindow
+from utilities.ui import initChordsWindow, initDeleteChordsDialog, renderChordsBrowser
+from main import MainWindow
+from utilities.utils import writeFile, getCurrentChordsData, getSaveFileName
+from utilities.text import getSongLabel, getChordsTextFileBody
+from constants import CHORDS_PLACEHOLDER
 
-def onAccept(window):
-    ui = window.ui
-    mainWindow = window.mainWindow
-    mainUi = mainWindow.ui
 
+def onActionTranspose(ui, value):
     def handleChange():
-        title = ui.chordsNameInput.text()
-        body = ui.lyricsInput.toPlainText()
-        currentSongId = ui.currentSong['_id']
-        if body:
-            if ui.mode == 'add':
-                newIndex = len(mainUi.allCurrentSongChords)
-                add_chords(title=title, body=body, songId=currentSongId)
-                refreshSongList(mainUi)
-                refreshChordsData(mainUi, newIndex=newIndex)
-            elif ui.mode == 'edit':
-                currentChordsId = ui.currentChords['_id']
-                currentChordsIndex = mainUi.currentChordsIndex
-                edit_chords(currentChordsId, title=title, body=body)
-                refreshChordsData(mainUi, newIndex=currentChordsIndex)
-            setCurrentTab(mainUi, 1)
-            window.close()
+        if value:
+            ui.transpose += value
         else:
-            mainWindow.showAlert('Chords cannot be empty!')
-            ui.lyricsInput.setFocus()
-
+            ui.transpose = 0
+        ui.actionTransposeReset.setIconText(str(ui.transpose))
+        ui.actionTransposeReset.setDisabled(ui.transpose == 0)
+        renderChordsBrowser(ui)
 
     return handleChange
 
 
-def onCancel(window):
-    def handleChange():
-        window.close()
-    return handleChange
-
-
-def onHelp(window):
-    def handleChange():
-        window.helpWindow.show()
-    return handleChange
-
-
-def onImport(window: ChordsWindow):
+def onActionChordsChart(window: MainWindow):
     ui = window.ui
 
     def handleChange():
-        result = getOpenFileContent(window, 'Import Song Lyrics')
-        if result:
-            (title, artist, name, body) = extractChordsFromText(result)
-            ui.chordsNameInput.setText(name)
-            ui.lyricsInput.setPlainText(body)
+        print('onActionChordsChart')
+
+    return handleChange
+
+
+def onActionExportChords(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        song = ui.currentSong
+        chords = getCurrentChordsData(ui)
+        chordsTitle = chords['title'] or CHORDS_PLACEHOLDER
+        fileName = getSaveFileName(window, 'Export lyrics as', f'{getSongLabel(song)} - {chordsTitle}')
+        if fileName[0]:
+            body = getChordsTextFileBody(song, chords)
+            writeFile(fileName[0], body)
+
+    return handleChange
+
+
+# --------------------------------- chords CRUD ---------------------------------
+def onActionAddChord(window: MainWindow):
+    def handleChange():
+        initChordsWindow(window.chordsWindow)
+        window.chordsWindow.show()
+
+    return handleChange
+
+
+def onActionEditChords(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        chords = ui.allCurrentSongChords[ui.currentChordsIndex]
+        initChordsWindow(window.chordsWindow, chords=chords)
+        window.chordsWindow.show()
+
+    return handleChange
+
+
+def onActionDuplicateChords(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        chords = ui.allCurrentSongChords[ui.currentChordsIndex]
+        initChordsWindow(window.chordsWindow, chords=chords, duplicate=True)
+        window.chordsWindow.show()
+
+    return handleChange
+
+
+def onActionDeleteChords(window: MainWindow):
+    def handleChange():
+        initDeleteChordsDialog(window.confirmDialog)
+        window.confirmDialog.show()
 
     return handleChange

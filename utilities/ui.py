@@ -2,9 +2,10 @@ import constants as const
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QListWidgetItem
 from service import get_songs_list, get_song_chords_list
-from utilities.utils import getCurrentChordsData, setActionsDisabled, setWidgetsVisible
+from utilities.utils import getCurrentChordsData, setActionsDisabled, setWidgetsVisible, setActionsVisible
 from utilities.text import getSongLabel, getInitialChords, getHtmlLyrics, addCopySuffix, getHtmlChords
 from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
+from UI.mainWindow import Ui_MainWindow
 
 
 def searchSong(ui, text):
@@ -92,6 +93,19 @@ def renderSongDetail(ui):
     ui.songTitleLabel.setText(song['title'])
     ui.songArtistLabel.setText(song['artist'] or ARTIST_PLACEHOLDER)
     ui.lyricsTextView.setHtml(lyrics)
+
+
+def refreshAccountActions(ui: Ui_MainWindow):
+    haveUser = bool(ui.userData)
+    dontHaveUserActions = [ui.actionSign_In, ui.actionSign_Up]
+    setActionsDisabled(not haveUser, [
+        ui.actionProfile,
+        ui.actionClear_Favorites,
+        ui.actionSign_Out
+    ])
+    setActionsDisabled(haveUser, dontHaveUserActions)
+    setActionsVisible(haveUser, [ui.actionSign_Out])
+    setActionsVisible(not haveUser, dontHaveUserActions)
 
 
 # ---------------------------- chords ----------------------------

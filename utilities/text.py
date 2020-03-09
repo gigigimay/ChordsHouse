@@ -11,7 +11,7 @@ def getInitialChords(lyrics: str):
     lines = lyrics.splitlines()
     result = []
     for line in lines:
-        l = f': \n> {line}' if line else '\n'
+        l = f': \n> {line}' if line else ''
         result.append(l)
     return '\n'.join(result)
 

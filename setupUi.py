@@ -1,7 +1,9 @@
-from utilities.ui import renderSongItems, setCurrentSong, setCurrentTab, setCurrentSongListIndex
-from actions import mainActions, lyricsActions, chordsActions, confirmDialogActions
+from utilities.ui import renderSongItems, setCurrentSong, setCurrentTab, setCurrentSongListIndex, refreshAccountActions
+from actions import mainActions, lyricsDialogActions, chordsDialogActions, confirmDialogActions, chordsActions, \
+    commonActions, displayActions, accountActions, songActions
 from service import get_songs_list
 from main import MainWindow, ChordsWindow, LyricsWindow
+
 
 def mainWindow(window: MainWindow):
     ui = window.ui
@@ -14,12 +16,14 @@ def mainWindow(window: MainWindow):
     ui.transpose = 0
     ui.sortBy = 'title'
     ui.stripedText = True
+    ui.userData = None
 
     # init ui
     setCurrentTab(ui, 0)
     renderSongItems(ui, ui.allSongs)
     setCurrentSong(ui, allSongs[initialSongIndex])
     setCurrentSongListIndex(ui, initialSongIndex)
+    refreshAccountActions(ui)
     ui.actionTransposeReset.setDisabled(ui.transpose == 0)
 
     # signal handling
@@ -28,63 +32,62 @@ def mainWindow(window: MainWindow):
     ui.chordComboBox.currentIndexChanged.connect(mainActions.onChordChanged(ui))
     ui.songTabWidget.currentChanged.connect(mainActions.onSongTabChanged(ui))
     ui.sortByComboBox.currentIndexChanged.connect(mainActions.onSortByChanged(ui))
-    ui.addChordButton.clicked.connect(mainActions.onActionAddChord(window))
     ui.favOnlyCheckbox.clicked.connect(mainActions.onFavOnlyClicked(window))
     ui.favButton.clicked.connect(mainActions.onFavButtonClicked(window))
+    ui.addChordButton.clicked.connect(chordsActions.onActionAddChord(window))
 
     # song actions
-    ui.actionNewSong.triggered.connect(mainActions.onActionAddSong(window))
-    ui.actionEditSong.triggered.connect(mainActions.onActionEditSong(window))
-    ui.actionDeleteSong.triggered.connect(mainActions.onActionDeleteSong(window))
-    ui.actionRefresh.triggered.connect(mainActions.onActionRefresh(ui))
-    ui.actionExport_Song.triggered.connect(mainActions.onActionExportSong(window))
+    ui.actionNewSong.triggered.connect(songActions.onActionAddSong(window))
+    ui.actionEditSong.triggered.connect(songActions.onActionEditSong(window))
+    ui.actionDeleteSong.triggered.connect(songActions.onActionDeleteSong(window))
+    ui.actionRefresh.triggered.connect(songActions.onActionRefresh(ui))
+    ui.actionExport_Song.triggered.connect(songActions.onActionExportSong(window))
 
     # chord actions
-    ui.actionAddChords.triggered.connect(mainActions.onActionAddChord(window))
-    ui.actionEditChords.triggered.connect(mainActions.onActionEditChords(window))
-    ui.actionDeleteChords.triggered.connect(mainActions.onActionDeleteChords(window))
-    ui.actionDuplicateChords.triggered.connect(mainActions.onActionDuplicateChords(window))
-    ui.actionTransposeUp.triggered.connect(mainActions.onActionTranspose(ui, 1))
-    ui.actionTransposeDown.triggered.connect(mainActions.onActionTranspose(ui, -1))
-    ui.actionTransposeReset.triggered.connect(mainActions.onActionTranspose(ui, 0))
-    ui.actionChordsChart.triggered.connect(mainActions.onActionChordsChart(window))
-    ui.actionExport_Chords.triggered.connect(mainActions.onActionExportChords(window))
+    ui.actionAddChords.triggered.connect(chordsActions.onActionAddChord(window))
+    ui.actionEditChords.triggered.connect(chordsActions.onActionEditChords(window))
+    ui.actionDeleteChords.triggered.connect(chordsActions.onActionDeleteChords(window))
+    ui.actionDuplicateChords.triggered.connect(chordsActions.onActionDuplicateChords(window))
+    ui.actionTransposeUp.triggered.connect(chordsActions.onActionTranspose(ui, 1))
+    ui.actionTransposeDown.triggered.connect(chordsActions.onActionTranspose(ui, -1))
+    ui.actionTransposeReset.triggered.connect(chordsActions.onActionTranspose(ui, 0))
+    ui.actionChordsChart.triggered.connect(chordsActions.onActionChordsChart(window))
+    ui.actionExport_Chords.triggered.connect(chordsActions.onActionExportChords(window))
 
     # display actions
-    ui.actionFontBigger.triggered.connect(mainActions.onActionFontSize(ui, 3))
-    ui.actionFontSmaller.triggered.connect(mainActions.onActionFontSize(ui, -3))
-    ui.actionStriped_Text.triggered.connect(mainActions.onActionStripedText(ui))
+    ui.actionFontBigger.triggered.connect(displayActions.onActionFontSize(ui, 3))
+    ui.actionFontSmaller.triggered.connect(displayActions.onActionFontSize(ui, -3))
+    ui.actionStriped_Text.triggered.connect(displayActions.onActionStripedText(ui))
 
     # profile actions
-    ui.actionSign_In.triggered.connect(mainActions.onActionLogin(window))
-    ui.actionSign_Out.triggered.connect(mainActions.onActionLogout(window))
-    ui.actionSign_Up.triggered.connect(mainActions.onActionRegister(window))
-    ui.actionClear_Favorites.triggered.connect(mainActions.onActionClearFav(window))
-    ui.actionProfile.triggered.connect(mainActions.onActionProfile(window))
+    ui.actionSign_In.triggered.connect(accountActions.onActionLogin(window))
+    ui.actionSign_Out.triggered.connect(accountActions.onActionLogout(window))
+    ui.actionSign_Up.triggered.connect(accountActions.onActionRegister(window))
+    ui.actionClear_Favorites.triggered.connect(accountActions.onActionClearFav(window))
+    ui.actionProfile.triggered.connect(accountActions.onActionProfile(window))
 
 
 def lyricsWindow(window: LyricsWindow):
     ui = window.ui
-    ui.buttonBox.accepted.connect(lyricsActions.onAccept(window))
-    ui.buttonBox.rejected.connect(lyricsActions.onCancel(window))
-    ui.importButton.clicked.connect(lyricsActions.onImport(window))
+    ui.buttonBox.accepted.connect(lyricsDialogActions.onAccept(window))
+    ui.buttonBox.rejected.connect(commonActions.onCancel(window))
+    ui.importButton.clicked.connect(lyricsDialogActions.onImport(window))
 
 
 def chordsWindow(window: ChordsWindow):
     ui = window.ui
-    ui.buttonBox.accepted.connect(chordsActions.onAccept(window))
-    ui.buttonBox.rejected.connect(chordsActions.onCancel(window))
-    ui.buttonBox.helpRequested.connect(chordsActions.onHelp(window))
-    ui.importButton.clicked.connect(chordsActions.onImport(window))
+    ui.buttonBox.accepted.connect(chordsDialogActions.onAccept(window))
+    ui.buttonBox.rejected.connect(commonActions.onCancel(window))
+    ui.buttonBox.helpRequested.connect(chordsDialogActions.onHelp(window))
+    ui.importButton.clicked.connect(chordsDialogActions.onImport(window))
 
 
 def confirmDialog(window):
     ui = window.ui
     ui.deleteButton.clicked.connect(confirmDialogActions.onDelete(window))
-    ui.cancelButton.clicked.connect(confirmDialogActions.onCancel(window))
+    ui.cancelButton.clicked.connect(commonActions.onCancel(window))
 
 
 def chordsHelpDialog(window):
     ui = window.ui
-    # may change into own actions
-    ui.pushButton.clicked.connect(confirmDialogActions.onCancel(window))
+    ui.pushButton.clicked.connect(commonActions.onCancel(window))
