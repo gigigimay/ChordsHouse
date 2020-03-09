@@ -1,4 +1,4 @@
-from utilities.ui import refreshSongList, refreshChordsData
+from utilities.ui import refreshSongList, refreshChordsData, setCurrentTab
 from service import add_chords, edit_chords
 
 def onAccept(window):
@@ -21,6 +21,7 @@ def onAccept(window):
                 currentChordsIndex = mainUi.currentChordsIndex
                 edit_chords(currentChordsId, title=title, body=body)
                 refreshChordsData(mainUi, newIndex=currentChordsIndex)
+            setCurrentTab(mainUi, 1)
             window.close()
         else:
             mainWindow.showAlert('Chords cannot be empty!')

@@ -1,4 +1,4 @@
-from utilities.ui import refreshSongList, setCurrentSong, setCurrentSongListIndex
+from utilities.ui import refreshSongList, setCurrentSong, setCurrentSongListIndex, setCurrentTab
 from service import add_song, edit_song
 
 
@@ -28,6 +28,7 @@ def onAccept(window):
                 currentSongId = ui.currentSong['_id']
                 edit_song(currentSongId, title=title, artist=artist, lyrics=lyrics)
                 refreshSongList(mainUi)
+            setCurrentTab(mainUi, 0)
             window.close()
         elif not title:
             mainWindow.showAlert('Please fill in song title!')

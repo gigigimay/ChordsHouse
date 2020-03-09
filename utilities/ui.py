@@ -199,7 +199,7 @@ def initDeleteSongDialog(window):
     ui = window.ui
     ui.mode = 'song'
     label = getSongLabel(window.mainWindow.ui.currentSong)
-    ui.label.setText(f'Delete this song?\n"{label}"\n*You cannot undo this.*')
+    ui.label.setText(f'ALL CHORDS IN THIS SONG WILL BE LOST.\n\nDelete this song?\n"{label}"')
 
 
 def initDeleteChordsDialog(window):
@@ -208,4 +208,4 @@ def initDeleteChordsDialog(window):
     label = getSongLabel(window.mainWindow.ui.currentSong)
     currentChords = getCurrentChordsData(window.mainWindow.ui)
     chordName = currentChords['title'] or CHORDS_PLACEHOLDER
-    ui.label.setText(f'Delete this chords?\n"{chordName}"\n{label}\n*You cannot undo this.*')
+    ui.label.setText(f'Delete this chords?\n{label}\n\n" {chordName} "')

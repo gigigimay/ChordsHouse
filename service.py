@@ -49,8 +49,9 @@ def edit_song(songId, **update):
 
 
 def delete_song(songId):
-    result = _songsCollection.delete_one({'_id': ObjectId(songId)})
-    print(f'deleted_count: {result.deleted_count}')
+    chordResult = _chordsCollection.delete_many({'songId': songId})
+    songResult = _songsCollection.delete_one({'_id': ObjectId(songId)})
+    print(f'deleted_count: song = {songResult.deleted_count}, chords = {chordResult.deleted_count}')
 
 
 def add_chords(**chord):

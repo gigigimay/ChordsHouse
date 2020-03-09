@@ -147,7 +147,7 @@ def getSongTextFileBody(song):
     title = song['title']
     artist = song['artist'] or ARTIST_PLACEHOLDER
     lyrics = song['lyrics']
-    return f'Title: \t\t{title}\nArtist: \t{artist}\n------\n{lyrics}'
+    return f'Title: {title}\nArtist: {artist}\n------\n{lyrics}'
 
 
 def getChordsTextFileBody(song, chords):
@@ -155,9 +155,8 @@ def getChordsTextFileBody(song, chords):
     artist = song['artist'] or ARTIST_PLACEHOLDER
     name = chords['title'] or CHORDS_PLACEHOLDER
     lyrics = chords['body']
-    return f'Title: \t\t\t{title}\nArtist: \t\t{artist}\nChords Name: \t{name}\n------\n{lyrics}'
+    return f'Title: {title}\nArtist: {artist}\nChordsName: {name}\n------\n{lyrics}'
 
 
 if __name__ == '__main__':
     print(addCopySuffix('Unnamed Chords    - 1', ['Unnamed Chords - 3', 'copy jaaaaa - 1', 'Unnamed Chords']))
-
