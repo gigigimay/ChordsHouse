@@ -18,6 +18,16 @@ def onSearch(ui):
     return handleChange
 
 
+def onSortByChanged(ui):
+    def handleChange(index):
+        if index == 1:
+            ui.sortBy = 'artist'
+        else:
+            ui.sortBy = 'title'
+        refreshSongList(ui)
+
+    return handleChange
+
 def onSongChanged(ui):
     def handleChange(item):
         if item:
@@ -32,7 +42,6 @@ def onSongChanged(ui):
 
 def onChordChanged(ui):
     def handleChange(index):
-        print(f'onChordChanged >> {index}')
         setCurrentChordsIndex(ui, index)
 
     return handleChange

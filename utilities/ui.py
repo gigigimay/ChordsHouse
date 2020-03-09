@@ -49,7 +49,7 @@ def renderSongItems(ui, songs):
 
 def refreshSongList(ui):
     # refresh song list
-    newAllSongs = get_songs_list()
+    newAllSongs = get_songs_list(ui.sortBy)
     ui.allSongs = newAllSongs
     renderSongItems(ui, ui.allSongs)
 

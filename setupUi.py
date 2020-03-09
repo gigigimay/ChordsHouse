@@ -5,12 +5,13 @@ from service import get_songs_list
 
 def mainWindow(window):
     ui = window.ui
-    allSongs = get_songs_list()
+    allSongs = get_songs_list('title')
     initialSongIndex = 0
     # init values
     ui.allSongs = allSongs
     ui.lyricsFontSize = 13
     ui.transpose = 0
+    ui.sortBy = 'title'
 
     # init ui
     setCurrentTab(ui, 1)
@@ -24,6 +25,7 @@ def mainWindow(window):
     ui.songList.currentItemChanged.connect(mainActions.onSongChanged(ui))
     ui.chordComboBox.currentIndexChanged.connect(mainActions.onChordChanged(ui))
     ui.songTabWidget.currentChanged.connect(mainActions.onSongTabChanged(ui))
+    ui.sortByComboBox.currentIndexChanged.connect(mainActions.onSortByChanged(ui))
     ui.addChordButton.clicked.connect(mainActions.onActionAddChord(window))
 
     # action handling
