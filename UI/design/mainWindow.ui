@@ -283,6 +283,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <addaction name="actionTransposeUp"/>
      <addaction name="actionTransposeDown"/>
+     <addaction name="actionTransposeReset"/>
     </widget>
     <addaction name="actionAddChords"/>
     <addaction name="actionEditChords"/>
@@ -290,8 +291,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionDuplicateChords"/>
     <addaction name="separator"/>
     <addaction name="menuTranspose"/>
-    <addaction name="actionTransposeReset"/>
-    <addaction name="separator"/>
     <addaction name="actionChordsChart"/>
    </widget>
    <widget class="QMenu" name="menuDisplay">
@@ -635,6 +634,9 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionStriped_Text">
    <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
     <bool>true</bool>
    </property>
    <property name="text">
