@@ -1,7 +1,8 @@
-from utilities.ui import initChordsWindow, initDeleteChordsDialog, renderChordsBrowser
-from main import MainWindow
+from utilities.ui import renderChordsBrowser
+from utilities.initWindow import initChordsWindow, initDeleteChordsDialog
 from utilities.utils import writeFile, getCurrentChordsData, getSaveFileName
 from utilities.text import getSongLabel, getChordsTextFileBody
+from main import MainWindow
 from constants import CHORDS_PLACEHOLDER
 
 

@@ -2,7 +2,7 @@ from utilities.ui import renderSongItems, setCurrentSong, setCurrentTab, setCurr
 from actions import mainActions, lyricsDialogActions, chordsDialogActions, confirmDialogActions, chordsActions, \
     commonActions, displayActions, accountActions, songActions
 from service import get_songs_list
-from main import MainWindow, ChordsWindow, LyricsWindow
+from main import MainWindow, ChordsWindow, LyricsWindow, LoginDialog, RegisterDialog
 
 
 def mainWindow(window: MainWindow):
@@ -91,3 +91,11 @@ def confirmDialog(window):
 def chordsHelpDialog(window):
     ui = window.ui
     ui.pushButton.clicked.connect(commonActions.onCancel(window))
+
+
+def loginDialog(window: LoginDialog):
+    ui = window.ui
+
+
+def registerDialog(window: RegisterDialog):
+    ui = window.ui

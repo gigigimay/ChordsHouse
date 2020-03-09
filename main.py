@@ -7,6 +7,8 @@ from UI.chordsWindow import Ui_ChordsWindow
 from UI.confirmDialog import Ui_confirmDialog
 from UI.chordsHelpDialog import Ui_chordsHelpDialog
 from UI.alertBox import Ui_alertBox
+from UI.loginDialog import Ui_loginDialog
+from UI.registerDialog import Ui_registerDialog
 
 
 class MainWindow(QMainWindow):
@@ -22,6 +24,8 @@ class MainWindow(QMainWindow):
         self.lyricsWindow = LyricsWindow(mainWindow=self)
         self.chordsWindow = ChordsWindow(mainWindow=self)
         self.confirmDialog = ConfirmDialog(mainWindow=self)
+        self.loginDialog = LoginDialog(mainWindow=self)
+        self.registerDialog = RegisterDialog(mainWindow=self)
         setupUi.mainWindow(self)
 
     def showAlert(self, text, title='Alert!'):
@@ -75,6 +79,26 @@ class AlertBox(QDialog):
         self.ui.setupUi(self)
         self.ui.label.setText(text)
         self.setWindowTitle(title)
+
+
+class LoginDialog(QDialog):
+    def __init__(self, mainWindow=None):
+        super(LoginDialog, self).__init__()
+        self.mainWindow = mainWindow
+        self.ui = Ui_loginDialog()
+        self.ui.setupUi(self)
+        self.setModal(True)
+        setupUi.loginDialog(self)
+
+
+class RegisterDialog(QDialog):
+    def __init__(self, mainWindow=None):
+        super(RegisterDialog, self).__init__()
+        self.mainWindow = mainWindow
+        self.ui = Ui_registerDialog()
+        self.ui.setupUi(self)
+        self.setModal(True)
+        setupUi.registerDialog(self)
 
 
 def main():

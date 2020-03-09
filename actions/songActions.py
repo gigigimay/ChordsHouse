@@ -1,4 +1,5 @@
-from utilities.ui import refreshSongList, initLyricsWindow, initDeleteSongDialog
+from utilities.ui import refreshSongList
+from utilities.initWindow import initLyricsWindow, initDeleteSongDialog
 from main import MainWindow
 from utilities.utils import writeFile, getSaveFileName
 from utilities.text import getSongLabel, getSongTextFileBody
