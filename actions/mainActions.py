@@ -3,6 +3,7 @@ from utilities.ui import setCurrentSong, setCurrentChordsIndex, renderSongDetail
     refreshSongList, initLyricsWindow, initDeleteSongDialog, initChordsWindow, initDeleteChordsDialog, setToolBar, \
     renderChordsBrowser, searchSong
 from main import MainWindow
+from UI.mainWindow import Ui_MainWindow
 
 
 # --------------------------------- ui actions ---------------------------------
@@ -99,9 +100,11 @@ def onActionRefresh(ui):
     return handleChange
 
 
-def onActionStripedText(ui):
-    def handleChange():
-        print('onActionStripedText')
+def onActionStripedText(ui: Ui_MainWindow):
+    def handleChange(bool):
+        ui.stripedText = bool
+        renderSongDetail(ui)
+        renderChordsBrowser(ui)
 
     return handleChange
 

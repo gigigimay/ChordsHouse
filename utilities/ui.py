@@ -88,7 +88,7 @@ def setCurrentChordsIndex(ui, index):
 
 def renderSongDetail(ui):
     song = ui.currentSong
-    lyrics = getHtmlLyrics(song['lyrics'], ui.lyricsFontSize)
+    lyrics = getHtmlLyrics(song['lyrics'], ui.lyricsFontSize, ui.stripedText)
     ui.songTitleLabel.setText(song['title'])
     ui.songArtistLabel.setText(song['artist'] or ARTIST_PLACEHOLDER)
     ui.lyricsTextView.setHtml(lyrics)
@@ -139,7 +139,7 @@ def setChordsDisabled(ui, disabled):
 def renderChordsBrowser(ui):
     chords = getCurrentChordsData(ui)
     if chords:
-        body = getHtmlChords(chords['body'], ui.lyricsFontSize, ui.transpose)
+        body = getHtmlChords(chords['body'], ui.lyricsFontSize, ui.transpose, ui.stripedText)
         ui.chordsTextView.setHtml(body)
 
 

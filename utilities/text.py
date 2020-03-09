@@ -16,12 +16,12 @@ def getInitialChords(lyrics: str):
     return '\n'.join(result)
 
 
-def getStripedText(lines):
+def getStripedText(lines, isStriped):
     result = []
     i = 0
     for line in lines:
         if line:
-            div = f'<div class="{"odd" if i % 2 else "even"}">{line}</div>'
+            div = f'<div class="{"odd" if (i % 2) and isStriped  else "even"}">{line}</div>'
             i += 1
         else:
             div = '<div> </div>'
@@ -55,13 +55,13 @@ def wrapHtml(text, fontSize):
             <html><head><style type="text/css">{style}</style></head>
             <body>{text}</body></html>'''
 
-def getHtmlLyrics(text, fontSize):
+def getHtmlLyrics(text, fontSize, isStriped):
     lines = text.splitlines()
-    result = getStripedText(lines)
+    result = getStripedText(lines, isStriped)
     return wrapHtml(result, fontSize)
 
 
-def getHtmlChords(text, fontSize, transpose):
+def getHtmlChords(text, fontSize, transpose, isStriped):
     lines = text.splitlines()
     resultTemp = []
     tempC = []
@@ -82,7 +82,7 @@ def getHtmlChords(text, fontSize, transpose):
                 resultTemp.append(line)
         else:
             resultTemp.append('')
-    result = getStripedText(resultTemp)
+    result = getStripedText(resultTemp, isStriped)
     return wrapHtml(result, fontSize)
 
 

@@ -7,12 +7,13 @@ def mainWindow(window: MainWindow):
     ui = window.ui
     allSongs = get_songs_list('title')
     initialSongIndex = 0
+
     # init values
     ui.allSongs = allSongs
     ui.lyricsFontSize = 13
     ui.transpose = 0
     ui.sortBy = 'title'
-
+    ui.stripedText = True
 
     # init ui
     setCurrentTab(ui, 0)
