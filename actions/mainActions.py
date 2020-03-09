@@ -25,6 +25,7 @@ def onSongChanged(ui):
             songId = song['_id']
             if ui.currentSong['_id'] != songId:
                 setCurrentSong(ui, song)
+                ui.actionTransposeReset.trigger()
 
     return handleChange
 

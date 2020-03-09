@@ -127,6 +127,7 @@ def renderChordsBrowser(ui):
         body = getHtmlChords(chords['body'], ui.lyricsFontSize, ui.transpose)
         ui.chordsTextView.setHtml(body)
 
+
 # ---------------------------- ui init ----------------------------
 def initLyricsWindow(window, song=None):
     ui = window.ui

@@ -6,8 +6,23 @@ _songsCollection = _db.get_collection('Songs')
 _chordsCollection = _db.get_collection('Chords')
 
 
-def get_songs_list():
-    result = list(_songsCollection.find({}))
+def get_songs_list(sortby='title'):
+    # result = list(_songsCollection.find({}))  # just in case :)
+    if sortby == 'title':
+        sort = {'lowerTitle': 1, 'lowerArtist': 1}
+    elif sortby == 'artist':
+        sort = {'lowerArtist': 1, 'lowerTitle': 1}
+    result = list(_songsCollection.aggregate([
+        {'$project': {
+            '_id': 1,
+            'title': 1,
+            'artist': 1,
+            'lyrics': 1,
+            'lowerTitle': {'$toLower': '$title'},
+            'lowerArtist': {'$toLower': '$artist'},
+        }},
+        {'$sort': sort}
+    ]))
     return result
 
 

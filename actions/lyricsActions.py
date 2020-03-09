@@ -14,13 +14,10 @@ def onAccept(window):
             if ui.mode == 'add':
                 id = add_song(title=title, artist=artist, lyrics=lyrics)
                 refreshSongList(mainUi)
-                # grant selection to new song
-                def fil(s):
-                    print(s['_id'])
-                    return s['_id'] == id
-                newSong = list(filter(fil, mainUi.allSongs))[0]
+
+                # select new song on create
+                newSong = list(filter(lambda song: song['_id'] == id, mainUi.allSongs))[0]
                 newIndex = mainUi.allSongs.index(newSong)
-                print(f'newIndex: {newIndex}')
                 setCurrentSong(mainUi, newSong)
                 setCurrentSongListIndex(mainUi, newIndex)
 

@@ -274,7 +274,7 @@ class Ui_MainWindow(object):
         self.chordsToolBar.addAction(self.actionChordsChart)
 
         self.retranslateUi(MainWindow)
-        self.songTabWidget.setCurrentIndex(1)
+        self.songTabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -314,10 +314,15 @@ class Ui_MainWindow(object):
         self.actionNewSong.setText(_translate("MainWindow", "New Song"))
         self.actionNewSong.setShortcut(_translate("MainWindow", "Ctrl+N"))
         self.actionEditSong.setText(_translate("MainWindow", "Edit Song"))
+        self.actionEditSong.setShortcut(_translate("MainWindow", "Ctrl+Shift+E"))
         self.actionDeleteSong.setText(_translate("MainWindow", "Delete Song"))
+        self.actionDeleteSong.setShortcut(_translate("MainWindow", "Ctrl+Shift+Backspace"))
         self.actionAddChords.setText(_translate("MainWindow", "New Chords"))
+        self.actionAddChords.setShortcut(_translate("MainWindow", "Ctrl+C"))
         self.actionEditChords.setText(_translate("MainWindow", "Edit Chords"))
+        self.actionEditChords.setShortcut(_translate("MainWindow", "Ctrl+E"))
         self.actionDeleteChords.setText(_translate("MainWindow", "Delete Chords"))
+        self.actionDeleteChords.setShortcut(_translate("MainWindow", "Ctrl+Backspace"))
         self.actionChordsChart.setText(_translate("MainWindow", "Chords Chart"))
         self.actionTransposeUp.setText(_translate("MainWindow", "+"))
         self.actionTransposeUp.setShortcut(_translate("MainWindow", "Ctrl+]"))
@@ -327,6 +332,7 @@ class Ui_MainWindow(object):
         self.actionTransposeReset.setIconText(_translate("MainWindow", "0"))
         self.actionTransposeReset.setShortcut(_translate("MainWindow", "Ctrl+P"))
         self.actionDuplicateChords.setText(_translate("MainWindow", "Duplicate Chords"))
+        self.actionDuplicateChords.setShortcut(_translate("MainWindow", "Ctrl+D"))
         self.actionFontBigger.setText(_translate("MainWindow", "Bigger"))
         self.actionFontBigger.setToolTip(_translate("MainWindow", "Increase lyrics font size"))
         self.actionFontBigger.setShortcut(_translate("MainWindow", "Ctrl+."))

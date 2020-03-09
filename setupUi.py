@@ -5,8 +5,9 @@ from service import get_songs_list
 
 def mainWindow(window):
     ui = window.ui
-    # init values
     allSongs = get_songs_list()
+    initialSongIndex = 0
+    # init values
     ui.allSongs = allSongs
     ui.lyricsFontSize = 13
     ui.transpose = 0
@@ -14,7 +15,6 @@ def mainWindow(window):
     # init ui
     setCurrentTab(ui, 1)
     renderSongItems(ui, ui.allSongs)
-    initialSongIndex = 0
     setCurrentSong(ui, allSongs[initialSongIndex])
     setCurrentSongListIndex(ui, initialSongIndex)
     ui.actionTransposeReset.setDisabled(ui.transpose == 0)
@@ -59,8 +59,8 @@ def chordsWindow(window):
 
 def confirmDialog(window):
     ui = window.ui
-    ui.buttonBox.rejected.connect(confirmDialogActions.onCancel(window))
-    ui.buttonBox.accepted.connect(confirmDialogActions.onDelete(window))
+    ui.deleteButton.clicked.connect(confirmDialogActions.onDelete(window))
+    ui.cancelButton.clicked.connect(confirmDialogActions.onCancel(window))
 
 
 def chordsHelpDialog(window):
