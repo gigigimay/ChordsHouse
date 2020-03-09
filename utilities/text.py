@@ -1,5 +1,5 @@
 import re
-from constants import ARTIST_PLACEHOLDER
+from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
 from utilities.transposer import transpose_line
 
 
@@ -141,6 +141,21 @@ def addCopySuffix(text: str, allTexts):
             nums.append(int(num[0]))
     newNum = missingInt(nums)
     return f'{name} - {newNum}'
+
+
+def getSongTextFileBody(song):
+    title = song['title']
+    artist = song['artist'] or ARTIST_PLACEHOLDER
+    lyrics = song['lyrics']
+    return f'Title: \t\t{title}\nArtist: \t{artist}\n------\n{lyrics}'
+
+
+def getChordsTextFileBody(song, chords):
+    title = song['title']
+    artist = song['artist'] or ARTIST_PLACEHOLDER
+    name = chords['title'] or CHORDS_PLACEHOLDER
+    lyrics = chords['body']
+    return f'Title: \t\t\t{title}\nArtist: \t\t{artist}\nChords Name: \t{name}\n------\n{lyrics}'
 
 
 if __name__ == '__main__':

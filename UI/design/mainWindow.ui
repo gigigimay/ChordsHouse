@@ -479,7 +479,7 @@ p, li { white-space: pre-wrap; }
     <string>Delete Chords</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Backspace</string>
+    <string>Ctrl+Alt+Backspace</string>
    </property>
   </action>
   <action name="actionChordsChart">
@@ -605,6 +605,9 @@ p, li { white-space: pre-wrap; }
    <property name="text">
     <string>Export Song...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionProfile">
    <property name="text">
@@ -648,6 +651,9 @@ p, li { white-space: pre-wrap; }
   <action name="actionExport_Chords">
    <property name="text">
     <string>Export Chords...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
    </property>
   </action>
  </widget>

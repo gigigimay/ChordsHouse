@@ -1,3 +1,6 @@
+from PyQt5.QtWidgets import QFileDialog
+
+
 def dump(obj):
     for attr in dir(obj):
         print("obj.%s = %r" % (attr, getattr(obj, attr)))
@@ -16,3 +19,17 @@ def setActionsDisabled(bool, actions):
 def setWidgetsVisible(bool, widgets):
     for w in widgets:
         w.show() if bool else w.hide()
+
+
+def writeFile(path, text):
+    with open(path, mode='w') as f:
+        f.write(text)
+
+
+def readFile(path):
+    with open(path, mode='r') as f:
+        return f.readlines()
+
+
+def getSaveFileName(window, caption, defaultName):
+    return QFileDialog.getSaveFileName(window, caption, f'{defaultName}.txt', filter='Text File(*.txt)')

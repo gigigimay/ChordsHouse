@@ -4,6 +4,9 @@ from utilities.ui import setCurrentSong, setCurrentChordsIndex, renderSongDetail
     renderChordsBrowser, searchSong
 from main import MainWindow
 from UI.mainWindow import Ui_MainWindow
+from utilities.utils import writeFile, getCurrentChordsData, getSaveFileName
+from utilities.text import getSongLabel, getSongTextFileBody, getChordsTextFileBody
+from constants import CHORDS_PLACEHOLDER
 
 
 # --------------------------------- ui actions ---------------------------------
@@ -167,7 +170,11 @@ def onActionExportSong(window: MainWindow):
     ui = window.ui
 
     def handleChange():
-        print('onActionExportSong')
+        song = ui.currentSong
+        fileName = getSaveFileName(window, 'Export lyrics as', getSongLabel(song))
+        if fileName[0]:
+            body = getSongTextFileBody(song)
+            writeFile(fileName[0], body)
 
     return handleChange
 
@@ -176,7 +183,13 @@ def onActionExportChords(window: MainWindow):
     ui = window.ui
 
     def handleChange():
-        print('onActionExportChords')
+        song = ui.currentSong
+        chords = getCurrentChordsData(ui)
+        chordsTitle = chords['title'] or CHORDS_PLACEHOLDER
+        fileName = getSaveFileName(window, 'Export lyrics as', f'{getSongLabel(song)} - {chordsTitle}')
+        if fileName[0]:
+            body = getChordsTextFileBody(song, chords)
+            writeFile(fileName[0], body)
 
     return handleChange
 

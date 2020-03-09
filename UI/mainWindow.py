@@ -364,7 +364,7 @@ class Ui_MainWindow(object):
         self.actionEditChords.setText(_translate("MainWindow", "Edit Chords"))
         self.actionEditChords.setShortcut(_translate("MainWindow", "Ctrl+E"))
         self.actionDeleteChords.setText(_translate("MainWindow", "Delete Chords"))
-        self.actionDeleteChords.setShortcut(_translate("MainWindow", "Ctrl+Backspace"))
+        self.actionDeleteChords.setShortcut(_translate("MainWindow", "Ctrl+Alt+Backspace"))
         self.actionChordsChart.setText(_translate("MainWindow", "Chords Chart"))
         self.actionTransposeUp.setText(_translate("MainWindow", "+"))
         self.actionTransposeUp.setShortcut(_translate("MainWindow", "Ctrl+]"))
@@ -388,6 +388,7 @@ class Ui_MainWindow(object):
         self.actionRefresh.setIconText(_translate("MainWindow", "Refresh"))
         self.actionRefresh.setShortcut(_translate("MainWindow", "Ctrl+R"))
         self.actionExport_Song.setText(_translate("MainWindow", "Export Song..."))
+        self.actionExport_Song.setShortcut(_translate("MainWindow", "Ctrl+S"))
         self.actionProfile.setText(_translate("MainWindow", "Profile"))
         self.actionClear_Favorites.setText(_translate("MainWindow", "Clear Favorites"))
         self.actionSign_Out.setText(_translate("MainWindow", "Sign Out"))
@@ -396,6 +397,7 @@ class Ui_MainWindow(object):
         self.actionSign_Up.setText(_translate("MainWindow", "Sign Up"))
         self.actionStriped_Text.setText(_translate("MainWindow", "Striped Text"))
         self.actionExport_Chords.setText(_translate("MainWindow", "Export Chords..."))
+        self.actionExport_Chords.setShortcut(_translate("MainWindow", "Ctrl+Shift+S"))
 
 
 if __name__ == "__main__":
