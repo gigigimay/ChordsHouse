@@ -28,6 +28,7 @@ def onSortByChanged(ui):
 
     return handleChange
 
+
 def onSongChanged(ui):
     def handleChange(item):
         if item:

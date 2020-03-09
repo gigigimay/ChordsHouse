@@ -157,7 +157,7 @@ def initChordsWindow(window, chords=None, duplicate=False):
     ui.currentChords = chords
     ui.currentSong = song
     ui.songTitleLabel.setText(song['title'])
-    ui.songArtistLabel.setText(song['artist'])
+    ui.songArtistLabel.setText(song['artist'] or ARTIST_PLACEHOLDER)
     if not chords:
         ui.mode = 'add'
         windowTitle = 'New Chords'
