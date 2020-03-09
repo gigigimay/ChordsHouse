@@ -1,9 +1,22 @@
 import constants as const
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QListWidgetItem
 from service import get_songs_list, get_song_chords_list
 from utilities.utils import getCurrentChordsData, setActionsDisabled, setWidgetsVisible
 from utilities.text import getSongLabel, getInitialChords, getHtmlLyrics, addCopySuffix, getHtmlChords
 from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
+
+
+def searchSong(ui, text):
+    def matchText(song):
+        lowerText = text.lower()
+        return lowerText in song['title'].lower() or lowerText in song['artist'].lower()
+
+    count = ui.songList.count()
+    for i in range(count):
+        item: QListWidgetItem = ui.songList.item(i)
+        song = item.data(const.SONG_ITEM_DATA_INDEX)
+        item.setHidden(not matchText(song))
 
 
 def setToolBar(ui, i):
@@ -63,7 +76,9 @@ def refreshSongList(ui):
     index = newAllSongs.index(newCurrentSong)
     ui.songList.setCurrentRow(index)
 
-    # TODO: clear search inputs OR do the search again
+    search = ui.searchInput.text()
+    if search:
+        searchSong(ui, search)
 
 
 def setCurrentChordsIndex(ui, index):
@@ -184,7 +199,7 @@ def initDeleteSongDialog(window):
     ui = window.ui
     ui.mode = 'song'
     label = getSongLabel(window.mainWindow.ui.currentSong)
-    ui.label.setText(f'Confirm Deletion?\n{label}')
+    ui.label.setText(f'Delete this song?\n"{label}"\n*You cannot undo this.*')
 
 
 def initDeleteChordsDialog(window):
@@ -193,4 +208,4 @@ def initDeleteChordsDialog(window):
     label = getSongLabel(window.mainWindow.ui.currentSong)
     currentChords = getCurrentChordsData(window.mainWindow.ui)
     chordName = currentChords['title'] or CHORDS_PLACEHOLDER
-    ui.label.setText(f'Confirm Deletion?\n"{chordName}"\n{label}')
+    ui.label.setText(f'Delete this chords?\n"{chordName}"\n{label}\n*You cannot undo this.*')

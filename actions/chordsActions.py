@@ -3,7 +3,8 @@ from service import add_chords, edit_chords
 
 def onAccept(window):
     ui = window.ui
-    mainUi = window.mainWindow.ui
+    mainWindow = window.mainWindow
+    mainUi = mainWindow.ui
 
     def handleChange():
         title = ui.chordsNameInput.text()
@@ -22,7 +23,9 @@ def onAccept(window):
                 refreshChordsData(mainUi, newIndex=currentChordsIndex)
             window.close()
         else:
-            print('please fill all required data')
+            mainWindow.showAlert('Chords cannot be empty!')
+            ui.lyricsInput.setFocus()
+
 
     return handleChange
 

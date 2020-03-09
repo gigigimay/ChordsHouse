@@ -45,7 +45,7 @@ def wrapHtml(text, fontSize):
                 background-color: #f3f3f3;
             }}
             .chords {{
-                color: #0b429c;
+                color: #333333;
                 font-weight: bold;
             }}
             .invalid {{

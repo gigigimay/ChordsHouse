@@ -14,7 +14,7 @@ def mainWindow(window):
     ui.sortBy = 'title'
 
     # init ui
-    setCurrentTab(ui, 1)
+    setCurrentTab(ui, 0)
     renderSongItems(ui, ui.allSongs)
     setCurrentSong(ui, allSongs[initialSongIndex])
     setCurrentSongListIndex(ui, initialSongIndex)

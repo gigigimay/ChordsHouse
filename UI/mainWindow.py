@@ -155,7 +155,7 @@ class Ui_MainWindow(object):
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.chordsToolBar)
         MainWindow.insertToolBarBreak(self.chordsToolBar)
         self.actionNewSong = QtWidgets.QAction(MainWindow)
-        self.actionNewSong.setCheckable(True)
+        self.actionNewSong.setCheckable(False)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("UI/assets/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionNewSong.setIcon(icon)

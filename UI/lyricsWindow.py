@@ -64,7 +64,6 @@ class Ui_LyricsWindow(object):
         self.dialogTitleLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.dialogTitleLabel.setObjectName("dialogTitleLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.dialogTitleLabel)
-
         self.retranslateUi(LyricsWindow)
         QtCore.QMetaObject.connectSlotsByName(LyricsWindow)
 

@@ -1,19 +1,13 @@
 import constants as const
 from utilities.ui import renderSongItems, setCurrentSong, setCurrentChordsIndex, renderSongDetail, \
     refreshSongList, initLyricsWindow, initDeleteSongDialog, initChordsWindow, initDeleteChordsDialog, setToolBar, \
-    renderChordsBrowser
+    renderChordsBrowser, searchSong
 
 
 # --------------------------------- ui actions ---------------------------------
 def onSearch(ui):
     def handleChange(text):
-        def matchText(song):
-            ltext = text.lower()
-            return ltext in song['title'].lower() or ltext in song['artist'].lower()
-
-        ui.songList.clear()
-        filtered = filter(matchText, ui.allSongs)
-        renderSongItems(ui, filtered)
+        searchSong(ui, text)
 
     return handleChange
 
