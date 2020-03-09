@@ -1,5 +1,8 @@
 from utilities.ui import refreshSongList, setCurrentSong, setCurrentSongListIndex, setCurrentTab
 from service import add_song, edit_song
+from utilities.utils import getOpenFileContent
+from utilities.text import extractLyricsFromText
+from main import LyricsWindow
 
 
 def onAccept(window):
@@ -36,10 +39,27 @@ def onAccept(window):
         elif not lyrics:
             mainWindow.showAlert('Please fill in song lyrics!')
             ui.lyricsInput.setFocus()
+
     return handleChange
 
 
 def onCancel(window):
     def handleChange():
         window.close()
+
+    return handleChange
+
+
+def onImport(window: LyricsWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onImport')
+        result = getOpenFileContent(window, 'Import Song Lyrics')
+        if result:
+            (title, artist, lyrics) = extractLyricsFromText(result)
+            ui.titleInput.setText(title)
+            ui.artistInput.setText(artist)
+            ui.lyricsInput.setPlainText(lyrics)
+
     return handleChange

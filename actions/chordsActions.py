@@ -1,5 +1,8 @@
 from utilities.ui import refreshSongList, refreshChordsData, setCurrentTab
+from utilities.utils import getOpenFileContent
+from utilities.text import extractChordsFromText
 from service import add_chords, edit_chords
+from main import ChordsWindow
 
 def onAccept(window):
     ui = window.ui
@@ -40,4 +43,17 @@ def onCancel(window):
 def onHelp(window):
     def handleChange():
         window.helpWindow.show()
+    return handleChange
+
+
+def onImport(window: ChordsWindow):
+    ui = window.ui
+
+    def handleChange():
+        result = getOpenFileContent(window, 'Import Song Lyrics')
+        if result:
+            (title, artist, name, body) = extractChordsFromText(result)
+            ui.chordsNameInput.setText(name)
+            ui.lyricsInput.setPlainText(body)
+
     return handleChange

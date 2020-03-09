@@ -4,3 +4,5 @@ MIN_FONT_SIZE = 6
 
 ARTIST_PLACEHOLDER = '(Unknown Artist)'
 CHORDS_PLACEHOLDER = 'Unnamed Chords'
+
+DIVIDER = '------'

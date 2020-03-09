@@ -1,7 +1,7 @@
 from utilities.ui import renderSongItems, setCurrentSong, setCurrentTab, setCurrentSongListIndex
 from actions import mainActions, lyricsActions, chordsActions, confirmDialogActions
 from service import get_songs_list
-from main import MainWindow
+from main import MainWindow, ChordsWindow, LyricsWindow
 
 def mainWindow(window: MainWindow):
     ui = window.ui
@@ -63,17 +63,19 @@ def mainWindow(window: MainWindow):
     ui.actionProfile.triggered.connect(mainActions.onActionProfile(window))
 
 
-def lyricsWindow(window):
+def lyricsWindow(window: LyricsWindow):
     ui = window.ui
     ui.buttonBox.accepted.connect(lyricsActions.onAccept(window))
     ui.buttonBox.rejected.connect(lyricsActions.onCancel(window))
+    ui.importButton.clicked.connect(lyricsActions.onImport(window))
 
 
-def chordsWindow(window):
+def chordsWindow(window: ChordsWindow):
     ui = window.ui
     ui.buttonBox.accepted.connect(chordsActions.onAccept(window))
     ui.buttonBox.rejected.connect(chordsActions.onCancel(window))
     ui.buttonBox.helpRequested.connect(chordsActions.onHelp(window))
+    ui.importButton.clicked.connect(chordsActions.onImport(window))
 
 
 def confirmDialog(window):

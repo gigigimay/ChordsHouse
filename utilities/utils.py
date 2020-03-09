@@ -28,8 +28,14 @@ def writeFile(path, text):
 
 def readFile(path):
     with open(path, mode='r') as f:
-        return f.readlines()
+        return f.read()
 
 
 def getSaveFileName(window, caption, defaultName):
     return QFileDialog.getSaveFileName(window, caption, f'{defaultName}.txt', filter='Text File(*.txt)')
+
+
+def getOpenFileContent(window, caption):
+    fileName = QFileDialog.getOpenFileName(window, caption, filter='Text File(*.txt)')
+    if fileName[0]:
+        return readFile(fileName[0])

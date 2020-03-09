@@ -1,5 +1,5 @@
 import re
-from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
+from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER, DIVIDER
 from utilities.transposer import transpose_line
 
 
@@ -147,7 +147,7 @@ def getSongTextFileBody(song):
     title = song['title']
     artist = song['artist'] or ARTIST_PLACEHOLDER
     lyrics = song['lyrics']
-    return f'Title: {title}\nArtist: {artist}\n------\n{lyrics}'
+    return f'Title: {title}\nArtist: {artist}\n{DIVIDER}\n{lyrics}'
 
 
 def getChordsTextFileBody(song, chords):
@@ -155,7 +155,39 @@ def getChordsTextFileBody(song, chords):
     artist = song['artist'] or ARTIST_PLACEHOLDER
     name = chords['title'] or CHORDS_PLACEHOLDER
     lyrics = chords['body']
-    return f'Title: {title}\nArtist: {artist}\nChordsName: {name}\n------\n{lyrics}'
+    return f'Title: {title}\nArtist: {artist}\nChordsName: {name}\n{DIVIDER}\n{lyrics}'
+
+
+def getValueFromKey(key, text):
+    data = text.split(': ')
+    if data[0] == key:
+        return data[1]
+
+
+def extractLyricsFromText(text: str):
+    lines = text.splitlines()
+    title = ''
+    artist = ''
+    if len(lines) >= 4 and lines[2] == DIVIDER:
+        title = getValueFromKey('Title', lines.pop(0))
+        artist = getValueFromKey('Artist', lines.pop(0))
+        lines.pop(0)
+    lyrics = '\n'.join(lines)
+    return (title, artist, lyrics)
+
+
+def extractChordsFromText(text: str):
+    lines = text.splitlines()
+    title = ''
+    artist = ''
+    name = ''
+    if len(lines) >= 5 and lines[3] == DIVIDER:
+        title = getValueFromKey('Title', lines.pop(0))
+        artist = getValueFromKey('Artist', lines.pop(0))
+        name = getValueFromKey('ChordsName', lines.pop(0))
+        lines.pop(0)
+    body = '\n'.join(lines)
+    return (title, artist, name, body)
 
 
 if __name__ == '__main__':
