@@ -1,7 +1,8 @@
 import constants as const
-from utilities.ui import renderSongItems, setCurrentSong, setCurrentChordsIndex, renderSongDetail, \
+from utilities.ui import setCurrentSong, setCurrentChordsIndex, renderSongDetail, \
     refreshSongList, initLyricsWindow, initDeleteSongDialog, initChordsWindow, initDeleteChordsDialog, setToolBar, \
     renderChordsBrowser, searchSong
+from main import MainWindow
 
 
 # --------------------------------- ui actions ---------------------------------
@@ -49,6 +50,24 @@ def onSongTabChanged(ui):
     return handleChange
 
 
+def onFavOnlyClicked(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onFavOnlyClicked')
+
+    return handleChange
+
+
+def onFavButtonClicked(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onFavButtonClicked')
+
+    return handleChange
+
+
 def onActionFontSize(ui, value):
     def handleChange():
         size = ui.lyricsFontSize + value
@@ -80,8 +99,87 @@ def onActionRefresh(ui):
     return handleChange
 
 
+def onActionStripedText(ui):
+    def handleChange():
+        print('onActionStripedText')
+
+    return handleChange
+
+
+def onActionChordsChart(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionChordsChart')
+
+    return handleChange
+
+
+def onActionLogin(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionLogin')
+
+    return handleChange
+
+
+def onActionLogout(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionLogout')
+
+    return handleChange
+
+
+def onActionRegister(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionRegister')
+
+    return handleChange
+
+
+def onActionProfile(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionProfile')
+
+    return handleChange
+
+
+def onActionClearFav(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionClearFav')
+
+    return handleChange
+
+
+def onActionExportSong(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionExportSong')
+
+    return handleChange
+
+
+def onActionExportChords(window: MainWindow):
+    ui = window.ui
+
+    def handleChange():
+        print('onActionExportChords')
+
+    return handleChange
+
+
 # --------------------------------- song CRUD ---------------------------------
-def onActionAddSong(window):
+def onActionAddSong(window: MainWindow):
     def handleChange():
         initLyricsWindow(window.lyricsWindow)
         window.lyricsWindow.show()
@@ -89,7 +187,7 @@ def onActionAddSong(window):
     return handleChange
 
 
-def onActionEditSong(window):
+def onActionEditSong(window: MainWindow):
     def handleChange():
         initLyricsWindow(window.lyricsWindow, song=window.ui.currentSong)
         window.lyricsWindow.show()
@@ -97,7 +195,7 @@ def onActionEditSong(window):
     return handleChange
 
 
-def onActionDeleteSong(window):
+def onActionDeleteSong(window: MainWindow):
     def handleChange():
         initDeleteSongDialog(window.confirmDialog)
         window.confirmDialog.show()
@@ -106,7 +204,7 @@ def onActionDeleteSong(window):
 
 
 # --------------------------------- chords CRUD ---------------------------------
-def onActionAddChord(window):
+def onActionAddChord(window: MainWindow):
     def handleChange():
         initChordsWindow(window.chordsWindow)
         window.chordsWindow.show()
@@ -114,7 +212,7 @@ def onActionAddChord(window):
     return handleChange
 
 
-def onActionEditChords(window):
+def onActionEditChords(window: MainWindow):
     ui = window.ui
 
     def handleChange():
@@ -125,7 +223,7 @@ def onActionEditChords(window):
     return handleChange
 
 
-def onActionDuplicateChords(window):
+def onActionDuplicateChords(window: MainWindow):
     ui = window.ui
 
     def handleChange():
@@ -136,7 +234,7 @@ def onActionDuplicateChords(window):
     return handleChange
 
 
-def onActionDeleteChords(window):
+def onActionDeleteChords(window: MainWindow):
     def handleChange():
         initDeleteChordsDialog(window.confirmDialog)
         window.confirmDialog.show()

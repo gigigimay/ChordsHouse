@@ -290,6 +290,8 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionDeleteChords"/>
     <addaction name="actionDuplicateChords"/>
     <addaction name="separator"/>
+    <addaction name="actionExport_Chords"/>
+    <addaction name="separator"/>
     <addaction name="menuTranspose"/>
     <addaction name="actionChordsChart"/>
    </widget>
@@ -312,7 +314,7 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Account</string>
     </property>
-    <addaction name="actionDetail"/>
+    <addaction name="actionProfile"/>
     <addaction name="actionClear_Favorites"/>
     <addaction name="separator"/>
     <addaction name="actionSign_In"/>
@@ -604,7 +606,7 @@ p, li { white-space: pre-wrap; }
     <string>Export Song...</string>
    </property>
   </action>
-  <action name="actionDetail">
+  <action name="actionProfile">
    <property name="text">
     <string>Profile</string>
    </property>
@@ -641,6 +643,11 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Striped Text</string>
+   </property>
+  </action>
+  <action name="actionExport_Chords">
+   <property name="text">
+    <string>Export Chords...</string>
    </property>
   </action>
  </widget>
