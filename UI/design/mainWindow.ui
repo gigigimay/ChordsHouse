@@ -53,6 +53,13 @@
   <property name="windowTitle">
    <string>ChordsHouse</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QToolBar::separator {
+width: 1px;
+background-color: #888;
+margin: 2px 6px;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
     <item>
@@ -88,18 +95,6 @@
         </item>
         <item>
          <widget class="QListWidget" name="songList"/>
-        </item>
-        <item>
-         <widget class="Line" name="line">
-          <property name="styleSheet">
-           <string notr="true">#line {
-    background-color: rgb(30, 30, 30);
-}</string>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="searchInput">
@@ -443,6 +438,9 @@ p, li { white-space: pre-wrap; }
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
    <property name="movable">
     <bool>false</bool>
    </property>
@@ -590,7 +588,7 @@ p, li { white-space: pre-wrap; }
     <string>-</string>
    </property>
    <property name="toolTip">
-    <string>Transpose Up</string>
+    <string>Transpose Down</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+[</string>
@@ -611,7 +609,8 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <family>Overpass Mono</family>
+     <pointsize>15</pointsize>
     </font>
    </property>
    <property name="shortcut">

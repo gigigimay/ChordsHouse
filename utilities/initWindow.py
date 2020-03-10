@@ -88,16 +88,18 @@ def initLoginDialog(window: LoginDialog, username=''):
 def initRegisterDialog(window: RegisterDialog, mode='register'):
     ui = window.ui
     ui.mode = mode
-    if mode == 'register':
-        label1 = 'Username'
-        label2 = 'Password'
-        label3 = 'Confirm Password'
-        ui.usernameInput.setEchoMode(QLineEdit.Normal)
-    elif mode == 'changePassword':
-        label1 = 'Old Password'
-        label2 = 'New Password'
-        label3 = 'Confirm Password'
+    if mode == 'changePassword':
+        label1 = 'Old Password*'
+        label2 = 'New Password*'
+        label3 = 'Confirm Password*'
+        windowTitle = 'Change Password'
         ui.usernameInput.setEchoMode(QLineEdit.Password)
+    else:
+        label1 = 'Username*'
+        label2 = 'Password*'
+        label3 = 'Confirm Password*'
+        windowTitle = 'Sign Up'
+        ui.usernameInput.setEchoMode(QLineEdit.Normal)
     ui.label.setText(label1)
     ui.label_2.setText(label2)
     ui.label_3.setText(label3)
@@ -105,4 +107,5 @@ def initRegisterDialog(window: RegisterDialog, mode='register'):
     ui.pwdInput.setText('')
     ui.pwdInput2.setText('')
     ui.usernameInput.setFocus()
+    window.setWindowTitle(windowTitle)
     window.show()

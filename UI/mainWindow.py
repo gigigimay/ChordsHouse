@@ -26,6 +26,11 @@ class Ui_MainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         MainWindow.setPalette(palette)
+        MainWindow.setStyleSheet("QToolBar::separator {\n"
+"width: 1px;\n"
+"background-color: #888;\n"
+"margin: 2px 6px;\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -51,14 +56,6 @@ class Ui_MainWindow(object):
         self.songList = QtWidgets.QListWidget(self.layoutWidget)
         self.songList.setObjectName("songList")
         self.verticalLayoutL.addWidget(self.songList)
-        self.line = QtWidgets.QFrame(self.layoutWidget)
-        self.line.setStyleSheet("#line {\n"
-"    background-color: rgb(30, 30, 30);\n"
-"}")
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
-        self.verticalLayoutL.addWidget(self.line)
         self.searchInput = QtWidgets.QLineEdit(self.layoutWidget)
         self.searchInput.setText("")
         self.searchInput.setObjectName("searchInput")
@@ -172,6 +169,7 @@ class Ui_MainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         self.chordsToolBar.setPalette(palette)
+        self.chordsToolBar.setAutoFillBackground(False)
         self.chordsToolBar.setMovable(False)
         self.chordsToolBar.setAllowedAreas(QtCore.Qt.AllToolBarAreas)
         self.chordsToolBar.setOrientation(QtCore.Qt.Horizontal)
@@ -225,8 +223,10 @@ class Ui_MainWindow(object):
         self.actionTransposeDown.setIcon(icon7)
         self.actionTransposeDown.setObjectName("actionTransposeDown")
         self.actionTransposeReset = QtWidgets.QAction(MainWindow)
+        self.actionTransposeReset.setEnabled(False)
         font = QtGui.QFont()
-        font.setPointSize(16)
+        font.setFamily("Overpass Mono")
+        font.setPointSize(15)
         self.actionTransposeReset.setFont(font)
         self.actionTransposeReset.setObjectName("actionTransposeReset")
         self.actionDuplicateChords = QtWidgets.QAction(MainWindow)
@@ -395,7 +395,7 @@ class Ui_MainWindow(object):
         self.actionTransposeUp.setToolTip(_translate("MainWindow", "Transpose Up"))
         self.actionTransposeUp.setShortcut(_translate("MainWindow", "Ctrl+]"))
         self.actionTransposeDown.setText(_translate("MainWindow", "-"))
-        self.actionTransposeDown.setToolTip(_translate("MainWindow", "Transpose Up"))
+        self.actionTransposeDown.setToolTip(_translate("MainWindow", "Transpose Down"))
         self.actionTransposeDown.setShortcut(_translate("MainWindow", "Ctrl+["))
         self.actionTransposeReset.setText(_translate("MainWindow", "Reset"))
         self.actionTransposeReset.setIconText(_translate("MainWindow", "0"))
