@@ -63,8 +63,8 @@ def add_chords(**chord):
 
 def edit_chords(chordsId, **update):
     result = _chordsCollection.update_one({'_id': ObjectId(chordsId)}, {'$set': update}, upsert=True)
-    print(f'edit_chords - modified_count: {result.modified_count}')
-    print(f'edit_chords - upserted_id: {result.upserted_id}')
+    print(f'(edit_chords) modified_count: {result.modified_count}')
+    print(f'(edit_chords) upserted_id: {result.upserted_id}')
 
 
 def delete_chords(chordsId):
@@ -96,8 +96,3 @@ def set_fav(user, favSongs: list):
 def edit_password(user, newPassword):
     result = _usersCollection.update_one({'_id': user['_id']}, {'$set': {'password': newPassword}})
     print(f'(edit_password) modified_count: {result.modified_count}')
-
-
-if __name__ == '__main__':
-    p = set_fav('gigigi', ['robb', 'stark', 'arya'])
-    print(p)

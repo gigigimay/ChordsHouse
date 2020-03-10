@@ -132,7 +132,6 @@ def renderSongDetail(ui):
 
 
 def renderFavButton(ui):
-    print('renderFavButton')
     user = ui.userData
     buttonText = '+ Fav'
     prevText = ui.favButton.text()

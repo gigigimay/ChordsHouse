@@ -193,7 +193,3 @@ def extractChordsFromText(text: str):
         lines.pop(0)
     body = '\n'.join(lines)
     return (title, artist, name, body)
-
-
-if __name__ == '__main__':
-    print()
