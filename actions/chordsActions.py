@@ -4,6 +4,14 @@ from utilities.utils import writeFile, getCurrentChordsData, getSaveFileName
 from utilities.text import getSongLabel, getChordsTextFileBody
 from main import MainWindow
 from constants import CHORDS_PLACEHOLDER
+import webbrowser
+
+
+def onActionChordsChart():
+    def handleChange():
+        webbrowser.open('https://cdn.lessons.com/assets/images/courses/guitar/guitar-chords-chart.jpg')
+
+    return handleChange
 
 
 def onActionTranspose(ui, value):
@@ -15,15 +23,6 @@ def onActionTranspose(ui, value):
         ui.actionTransposeReset.setIconText(str(ui.transpose))
         ui.actionTransposeReset.setDisabled(ui.transpose == 0)
         renderChordsBrowser(ui)
-
-    return handleChange
-
-
-def onActionChordsChart(window: MainWindow):
-    ui = window.ui
-
-    def handleChange():
-        print('onActionChordsChart')
 
     return handleChange
 

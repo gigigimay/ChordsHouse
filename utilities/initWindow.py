@@ -29,6 +29,7 @@ def initLyricsWindow(window, song=None):
 def initChordsWindow(window, chords=None, duplicate=False):
     ui = window.ui
     song = window.mainWindow.ui.currentSong
+    user = window.mainWindow.ui.userData
 
     ui.chordsNameInput.setFocus()
     ui.currentChords = chords
@@ -38,7 +39,7 @@ def initChordsWindow(window, chords=None, duplicate=False):
     if not chords:
         ui.mode = 'add'
         windowTitle = 'New Chords'
-        chordsTitle = ''
+        chordsTitle = '' if not user else user['username']
         chordsBody = getInitialChords(song['lyrics'])
     elif duplicate:
         allChordsName = [c['title'] or CHORDS_PLACEHOLDER for c in window.mainWindow.ui.allCurrentSongChords]

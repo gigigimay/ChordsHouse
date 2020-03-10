@@ -51,7 +51,7 @@ def mainWindow(window: MainWindow):
     ui.actionTransposeUp.triggered.connect(chordsActions.onActionTranspose(ui, 1))
     ui.actionTransposeDown.triggered.connect(chordsActions.onActionTranspose(ui, -1))
     ui.actionTransposeReset.triggered.connect(chordsActions.onActionTranspose(ui, 0))
-    ui.actionChordsChart.triggered.connect(chordsActions.onActionChordsChart(window))
+    ui.actionChordsChart.triggered.connect(chordsActions.onActionChordsChart())
     ui.actionExport_Chords.triggered.connect(chordsActions.onActionExportChords(window))
 
     # display actions

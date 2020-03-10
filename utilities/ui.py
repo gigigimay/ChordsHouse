@@ -186,11 +186,11 @@ def setChordsDisabled(ui, disabled):
     actions = [
         ui.actionEditChords,
         ui.actionDeleteChords,
-        ui.actionChordsChart,
         ui.actionTransposeUp,
         ui.actionTransposeDown,
         ui.actionTransposeReset,
         ui.actionDuplicateChords,
+        ui.actionExport_Chords,
     ]
     haveChordsWidgets = [ui.chordComboBox, ui.chordsTextView]
     dontHaveChordsWidgets = [ui.addChordButton]
