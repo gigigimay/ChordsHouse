@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_chordsHelpDialog(object):
     def setupUi(self, chordsHelpDialog):
         chordsHelpDialog.setObjectName("chordsHelpDialog")
-        chordsHelpDialog.resize(446, 320)
+        chordsHelpDialog.resize(466, 248)
         self.verticalLayout = QtWidgets.QVBoxLayout(chordsHelpDialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.textBrowser = QtWidgets.QTextBrowser(chordsHelpDialog)
@@ -36,16 +36,14 @@ class Ui_chordsHelpDialog(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Overpass Mono\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:600; color:#000000;\">How to write chords</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">- All </span><span style=\" font-weight:600; color:#149a8b;\">chords</span><span style=\" color:#000000;\"> lines must have </span><span style=\" font-weight:600; color:#149a8b;\">:</span><span style=\" color:#000000;\"> prefix.</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">- All </span><span style=\" font-weight:600; color:#149a8b;\">lyrics</span><span style=\" color:#000000;\"> lines must have </span><span style=\" font-weight:600; color:#149a8b;\">&gt;</span><span style=\" color:#000000;\"> prefix.</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">- All prefixes mush be followed by a space</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:600; color:#ffffff;\">How to write chords</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ffffff;\">- All </span><span style=\" font-weight:600; color:#4ee6d3;\">chords</span><span style=\" color:#000000;\"> </span><span style=\" color:#ffffff;\">lines must have </span><span style=\" font-weight:600; color:#4ee6d3;\">:</span><span style=\" color:#ffffff;\"> prefix.</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ffffff;\">- All </span><span style=\" font-weight:600; color:#4ee6d3;\">lyrics</span><span style=\" color:#000000;\"> </span><span style=\" color:#ffffff;\">lines must have</span><span style=\" color:#000000;\"> </span><span style=\" font-weight:600; color:#149a8b;\">&gt;</span><span style=\" color:#000000;\"> </span><span style=\" color:#ffffff;\">prefix.</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ffffff;\">- All prefixes mush be followed by a space</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; color:#000000;\">example:</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#f3f3f3;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#f3f3f3;\"><span style=\" font-weight:600; color:#149a8b;\">:</span><span style=\" color:#000000;\"> </span><span style=\" font-weight:600; color:#000000;\">Em</span><span style=\" color:#000000;\">       </span><span style=\" font-weight:600; color:#000000;\">C</span><span style=\" color:#000000;\">                </span><span style=\" font-weight:600; color:#000000;\">G</span><span style=\" color:#000000;\">                </span><span style=\" font-weight:600; color:#000000;\">D/F#</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#f3f3f3;\"><span style=\" font-weight:600; color:#149a8b;\">&gt;</span><span style=\" color:#000000;\"> Another head hangs lowly, child is slowly taken</span> </p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#f3f3f3;\"><br /></p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; color:#4ee6d3;\">example</span><span style=\" font-size:18pt; color:#0094b6;\">:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2d2d2d;\"><span style=\" font-weight:600; color:#4ee6d3;\">:</span><span style=\" color:#000000;\"> </span><span style=\" font-weight:600; color:#ffffff;\">Em</span><span style=\" color:#ffffff;\">       </span><span style=\" font-weight:600; color:#ffffff;\">C</span><span style=\" color:#ffffff;\">                </span><span style=\" font-weight:600; color:#ffffff;\">G</span><span style=\" color:#ffffff;\">                </span><span style=\" font-weight:600; color:#ffffff;\">D/F#</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2d2d2d;\"><span style=\" font-weight:600; color:#4ee6d3;\">&gt;</span><span style=\" color:#4ee6d3;\"> </span><span style=\" color:#ffffff;\">Another head hangs lowly, child is slowly taken </span></p></body></html>"))
         self.pushButton.setText(_translate("chordsHelpDialog", "Close"))
 
 

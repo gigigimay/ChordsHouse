@@ -47,14 +47,14 @@ def wrapHtml(text, fontSize):
                 margin: {fontSize / 2}px 0;
             }}
             .odd {{
-                background-color: #f3f3f3;
+                background-color: #2d2d2d;
             }}
             .chords {{
-                color: #333333;
+                color: #79dcd2;
                 font-weight: bold;
             }}
             .invalid {{
-                color: #c70431;
+                color: #d14f4f;
             }}'''
     return f'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
             <html><head><style type="text/css">{style}</style></head>

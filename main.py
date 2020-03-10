@@ -1,6 +1,7 @@
 import sys
 import setupUi
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
+from theme import  setTheme
 from UI.mainWindow import Ui_MainWindow
 from UI.lyricsWindow import Ui_LyricsWindow
 from UI.chordsWindow import Ui_ChordsWindow
@@ -69,6 +70,7 @@ class ChordsHelpDialog(QDialog):
         super(ChordsHelpDialog, self).__init__()
         self.ui = Ui_chordsHelpDialog()
         self.ui.setupUi(self)
+        self.setModal(True)
         setupUi.chordsHelpDialog(self)
 
 
@@ -103,6 +105,7 @@ class RegisterDialog(QDialog):
 
 def main():
     app = QApplication(sys.argv)
+    setTheme(app)
     mainWindow = MainWindow()
     mainWindow.show()
     sys.exit(app.exec_())

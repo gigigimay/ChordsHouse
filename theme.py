@@ -1,8 +1,9 @@
 from PyQt5 import QtGui, QtCore
+from PyQt5.QtWidgets import QApplication
 
 grey = QtGui.QColor(50, 53, 55)
 
-def setTheme(app):
+def setTheme(app: QApplication):
     app.setStyle('Fusion')
     palette = QtGui.QPalette()
     palette.setColor(QtGui.QPalette.Window, grey)
