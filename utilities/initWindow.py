@@ -2,6 +2,7 @@ from utilities.utils import getCurrentChordsData
 from utilities.text import getSongLabel, getInitialChords, addCopySuffix
 from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
 from main import LoginDialog, RegisterDialog
+from PyQt5.QtWidgets import QLineEdit
 
 
 # ---------------------------- ui init ----------------------------
@@ -83,8 +84,22 @@ def initLoginDialog(window: LoginDialog, username=''):
     window.show()
 
 
-def initRegisterDialog(window: RegisterDialog):
+def initRegisterDialog(window: RegisterDialog, mode='register'):
     ui = window.ui
+    ui.mode = mode
+    if mode == 'register':
+        label1 = 'Username'
+        label2 = 'Password'
+        label3 = 'Confirm Password'
+        ui.usernameInput.setEchoMode(QLineEdit.Normal)
+    elif mode == 'changePassword':
+        label1 = 'Old Password'
+        label2 = 'New Password'
+        label3 = 'Confirm Password'
+        ui.usernameInput.setEchoMode(QLineEdit.Password)
+    ui.label.setText(label1)
+    ui.label_2.setText(label2)
+    ui.label_3.setText(label3)
     ui.usernameInput.setText('')
     ui.pwdInput.setText('')
     ui.pwdInput2.setText('')

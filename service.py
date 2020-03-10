@@ -93,6 +93,11 @@ def set_fav(user, favSongs: list):
     print(f'(set_fav) modified_count: {result.modified_count}')
 
 
+def edit_password(user, newPassword):
+    result = _usersCollection.update_one({'_id': user['_id']}, {'$set': {'password': newPassword}})
+    print(f'(edit_password) modified_count: {result.modified_count}')
+
+
 if __name__ == '__main__':
     p = set_fav('gigigi', ['robb', 'stark', 'arya'])
     print(p)

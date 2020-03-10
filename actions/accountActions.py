@@ -29,10 +29,9 @@ def onActionRegister(window: MainWindow):
 
 
 def onActionChangePassword(window: MainWindow):
-    ui = window.ui
 
     def handleChange():
-        print('onActionEditPassword')
+        initRegisterDialog(window.registerDialog, 'changePassword')
 
     return handleChange
 

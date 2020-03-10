@@ -57,6 +57,7 @@ def mainWindow(window: MainWindow):
     # display actions
     ui.actionFontBigger.triggered.connect(displayActions.onActionFontSize(ui, 3))
     ui.actionFontSmaller.triggered.connect(displayActions.onActionFontSize(ui, -3))
+    ui.actionFontReset.triggered.connect(displayActions.onActionFontSize(ui, 0))
     ui.actionStriped_Text.triggered.connect(displayActions.onActionStripedText(ui))
 
     # profile actions
