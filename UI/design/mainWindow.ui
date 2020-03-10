@@ -314,9 +314,9 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Account</string>
     </property>
-    <addaction name="actionProfile"/>
     <addaction name="actionClear_Favorites"/>
     <addaction name="separator"/>
+    <addaction name="actionChangePassword"/>
     <addaction name="actionSign_In"/>
     <addaction name="actionSign_Out"/>
     <addaction name="actionSign_Up"/>
@@ -609,9 +609,9 @@ p, li { white-space: pre-wrap; }
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionProfile">
+  <action name="actionChangePassword">
    <property name="text">
-    <string>Profile</string>
+    <string>Change Password</string>
    </property>
   </action>
   <action name="actionClear_Favorites">

@@ -7,6 +7,16 @@ from utilities.text import getSongLabel, getHtmlLyrics, getHtmlChords
 from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
 
 
+def setCurrentUser(ui, user):
+    ui.userData = user
+    if user:
+        ui.actionSign_Out.setText(f'Sign Out ({user["username"]})')
+    else:
+        ui.favOnlyCheckbox.setChecked(False)
+        ui.favButton.setText('+ Fav')
+    refreshAccountActions(ui)
+
+
 def searchSong(ui, text):
     def matchText(song):
         lowerText = text.lower()
@@ -98,7 +108,7 @@ def refreshAccountActions(ui):
     haveUser = bool(ui.userData)
     dontHaveUserActions = [ui.actionSign_In, ui.actionSign_Up]
     setActionsDisabled(not haveUser, [
-        ui.actionProfile,
+        ui.actionChangePassword,
         ui.actionClear_Favorites,
         ui.actionSign_Out
     ])

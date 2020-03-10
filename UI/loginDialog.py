@@ -29,6 +29,7 @@ class Ui_loginDialog(object):
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_2)
         self.pwdInput = QtWidgets.QLineEdit(loginDialog)
         self.pwdInput.setText("")
+        self.pwdInput.setEchoMode(QtWidgets.QLineEdit.Password)
         self.pwdInput.setObjectName("pwdInput")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.pwdInput)
         self.buttonBox = QtWidgets.QDialogButtonBox(loginDialog)

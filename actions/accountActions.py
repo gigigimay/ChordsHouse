@@ -1,5 +1,6 @@
 from main import MainWindow
 from utilities.initWindow import initLoginDialog, initRegisterDialog
+from utilities.ui import setCurrentUser
 
 
 def onActionLogin(window: MainWindow):
@@ -16,8 +17,8 @@ def onActionLogout(window: MainWindow):
     ui = window.ui
 
     def handleChange():
-        ui.userData = None
-        print('onActionLogout')
+        setCurrentUser(ui, None)
+        window.showAlert('Logged out.', 'Message')
 
     return handleChange
 
@@ -32,11 +33,11 @@ def onActionRegister(window: MainWindow):
     return handleChange
 
 
-def onActionProfile(window: MainWindow):
+def onActionChangePassword(window: MainWindow):
     ui = window.ui
 
     def handleChange():
-        print('onActionProfile')
+        print('onActionEditPassword')
 
     return handleChange
 

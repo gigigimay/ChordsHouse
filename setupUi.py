@@ -1,4 +1,4 @@
-from utilities.ui import renderSongItems, setCurrentSong, setCurrentTab, setCurrentSongListIndex, refreshAccountActions
+from utilities.ui import renderSongItems, setCurrentSong, setCurrentTab, setCurrentSongListIndex, setCurrentUser
 from actions import mainActions, lyricsDialogActions, chordsDialogActions, confirmDialogActions, chordsActions, \
     commonActions, displayActions, accountActions, songActions, loginDialogActions, registerDialogActions
 from service import get_songs_list
@@ -16,14 +16,13 @@ def mainWindow(window: MainWindow):
     ui.transpose = 0
     ui.sortBy = 'title'
     ui.stripedText = True
-    ui.userData = None
 
     # init ui
+    setCurrentUser(ui, None)
     setCurrentTab(ui, 0)
     renderSongItems(ui, ui.allSongs)
     setCurrentSong(ui, allSongs[initialSongIndex])
     setCurrentSongListIndex(ui, initialSongIndex)
-    refreshAccountActions(ui)
     ui.actionTransposeReset.setDisabled(ui.transpose == 0)
 
     # signal handling
@@ -64,7 +63,7 @@ def mainWindow(window: MainWindow):
     ui.actionSign_Out.triggered.connect(accountActions.onActionLogout(window))
     ui.actionSign_Up.triggered.connect(accountActions.onActionRegister(window))
     ui.actionClear_Favorites.triggered.connect(accountActions.onActionClearFav(window))
-    ui.actionProfile.triggered.connect(accountActions.onActionProfile(window))
+    ui.actionChangePassword.triggered.connect(accountActions.onActionChangePassword(window))
 
 
 def lyricsWindow(window: LyricsWindow):
@@ -96,6 +95,7 @@ def chordsHelpDialog(window):
 def loginDialog(window: LoginDialog):
     ui = window.ui
     ui.registerButton.clicked.connect(loginDialogActions.onRegister(window))
+    ui.buttonBox.accepted.connect(loginDialogActions.onAccept(window))
 
 
 def registerDialog(window: RegisterDialog):

@@ -78,11 +78,16 @@ def add_user(username, password):
     return result.inserted_id
 
 
-def check_username_used(username):
+def check_username_exist(username):
     result = _usersCollection.find_one({'username': username})
     return bool(result)
 
 
+def login(username, password):
+    result = _usersCollection.find_one({'username': username, 'password': password})
+    return result
+
+
 if __name__ == '__main__':
-    p = check_username_used('gigigi')
+    p = check_username_exist('gigigi')
     print(p)
