@@ -73,7 +73,7 @@ def delete_chords(chordsId):
 
 
 def add_user(username, password):
-    result = _usersCollection.insert_one({'username': username, 'password': password})
+    result = _usersCollection.insert_one({'username': username, 'password': password, 'favSongs': []})
     print(f'inserted_id: {result.inserted_id}')
     return result.inserted_id
 
@@ -88,6 +88,11 @@ def login(username, password):
     return result
 
 
+def set_fav(user, favSongs: list):
+    result = _usersCollection.update_one({'_id': user['_id']}, {'$set': {'favSongs': favSongs}})
+    print(f'(set_fav) modified_count: {result.modified_count}')
+
+
 if __name__ == '__main__':
-    p = check_username_exist('gigigi')
+    p = set_fav('gigigi', ['robb', 'stark', 'arya'])
     print(p)

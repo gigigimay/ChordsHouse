@@ -16,13 +16,14 @@ def mainWindow(window: MainWindow):
     ui.transpose = 0
     ui.sortBy = 'title'
     ui.stripedText = True
+    ui.userData = None
 
     # init ui
-    setCurrentUser(ui, None)
     setCurrentTab(ui, 0)
     renderSongItems(ui, ui.allSongs)
     setCurrentSong(ui, allSongs[initialSongIndex])
     setCurrentSongListIndex(ui, initialSongIndex)
+    setCurrentUser(ui, None)
     ui.actionTransposeReset.setDisabled(ui.transpose == 0)
 
     # signal handling

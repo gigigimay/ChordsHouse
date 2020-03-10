@@ -1,7 +1,7 @@
 import constants as const
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QListWidgetItem
-from service import get_songs_list, get_song_chords_list
+from service import get_songs_list, get_song_chords_list, set_fav
 from utilities.utils import getCurrentChordsData, setActionsDisabled, setWidgetsVisible, setActionsVisible
 from utilities.text import getSongLabel, getHtmlLyrics, getHtmlChords
 from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
@@ -15,10 +15,37 @@ def setCurrentUser(ui, user):
         ui.favOnlyCheckbox.setChecked(False)
         ui.favButton.setText('+ Fav')
     refreshAccountActions(ui)
+    renderFavButton(ui)
+
+
+def toggleSongFav(ui):
+    favSongs: list = ui.userData['favSongs']
+    songId = ui.currentSong['_id']
+    newFav = favSongs.copy()
+    if songId in newFav:
+        newFav.remove(songId)
+    else:
+        newFav.append(songId)
+    setSongFav(ui, newFav)
+
+
+def setSongFav(ui, newFav):
+    user = ui.userData
+    ui.userData['favSongs'] = newFav
+    set_fav(user, newFav)
+    renderFavButton(ui)
+    ui.favButton.repaint()
+    if ui.favOnlyCheckbox.isChecked():
+        search = ui.searchInput.text()
+        searchSong(ui, search)
 
 
 def searchSong(ui, text):
-    def matchText(song):
+    isFavOnly = ui.favOnlyCheckbox.isChecked()
+
+    def match(song):
+        if isFavOnly and song['_id'] not in ui.userData['favSongs']:
+            return False
         lowerText = text.lower()
         return lowerText in song['title'].lower() or lowerText in song['artist'].lower()
 
@@ -26,7 +53,7 @@ def searchSong(ui, text):
     for i in range(count):
         item: QListWidgetItem = ui.songList.item(i)
         song = item.data(const.SONG_ITEM_DATA_INDEX)
-        item.setHidden(not matchText(song))
+        item.setHidden(not match(song))
 
 
 def setToolBar(ui, i):
@@ -48,6 +75,7 @@ def setCurrentSong(ui, song):
     # song
     ui.currentSong = song
     renderSongDetail(ui)
+    renderFavButton(ui)
 
     # chords
     chords = get_song_chords_list(song['_id'])
@@ -87,8 +115,7 @@ def refreshSongList(ui):
     ui.songList.setCurrentRow(index)
 
     search = ui.searchInput.text()
-    if search:
-        searchSong(ui, search)
+    searchSong(ui, search)
 
 
 def setCurrentChordsIndex(ui, index):
@@ -102,6 +129,19 @@ def renderSongDetail(ui):
     ui.songTitleLabel.setText(song['title'])
     ui.songArtistLabel.setText(song['artist'] or ARTIST_PLACEHOLDER)
     ui.lyricsTextView.setHtml(lyrics)
+
+
+def renderFavButton(ui):
+    print('renderFavButton')
+    user = ui.userData
+    buttonText = '+ Fav'
+    prevText = ui.favButton.text()
+    if user:
+        favSongs: list = user['favSongs']
+        if ui.currentSong['_id'] in favSongs:
+            buttonText = '- Fav'
+    if buttonText != prevText:
+        ui.favButton.setText(buttonText)
 
 
 def refreshAccountActions(ui):

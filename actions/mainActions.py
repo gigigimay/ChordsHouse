@@ -1,5 +1,5 @@
 import constants as const
-from utilities.ui import setCurrentSong, setCurrentChordsIndex, refreshSongList, setToolBar, searchSong
+from utilities.ui import setCurrentSong, setCurrentChordsIndex, refreshSongList, setToolBar, searchSong, toggleSongFav
 from main import MainWindow
 
 
@@ -51,11 +51,12 @@ def onSongTabChanged(ui):
 def onFavOnlyClicked(window: MainWindow):
     ui = window.ui
 
-    def handleChange(value):
-        print(f'onFavButtonClicked >> {value}')
+    def handleChange():
         if not ui.userData:
             ui.favOnlyCheckbox.setChecked(False)
             ui.actionSign_In.trigger()
+        else:
+            refreshSongList(ui)
 
     return handleChange
 
@@ -63,9 +64,10 @@ def onFavOnlyClicked(window: MainWindow):
 def onFavButtonClicked(window: MainWindow):
     ui = window.ui
 
-    def handleChange(value):
-        print(f'onFavButtonClicked >> {value}')
+    def handleChange():
         if not ui.userData:
             ui.actionSign_In.trigger()
+        else:
+            toggleSongFav(ui)
 
     return handleChange

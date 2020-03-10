@@ -47,7 +47,6 @@ def onImport(window: LyricsWindow):
     ui = window.ui
 
     def handleChange():
-        print('onImport')
         result = getOpenFileContent(window, 'Import Song Lyrics')
         if result:
             (title, artist, lyrics) = extractLyricsFromText(result)
