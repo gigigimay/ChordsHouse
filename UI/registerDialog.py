@@ -45,7 +45,6 @@ class Ui_registerDialog(object):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.buttonBox)
 
         self.retranslateUi(registerDialog)
-        self.buttonBox.accepted.connect(registerDialog.accept)
         self.buttonBox.rejected.connect(registerDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(registerDialog)
 

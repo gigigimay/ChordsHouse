@@ -1,6 +1,11 @@
 import re
 from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER, DIVIDER
 from utilities.transposer import transpose_line
+import hashlib
+
+
+def encode(str):
+    return hashlib.md5(str.encode()).hexdigest()
 
 
 def getSongLabel(song):
@@ -191,4 +196,4 @@ def extractChordsFromText(text: str):
 
 
 if __name__ == '__main__':
-    print(addCopySuffix('Unnamed Chords    - 1', ['Unnamed Chords - 3', 'copy jaaaaa - 1', 'Unnamed Chords']))
+    print(encode('aa'))

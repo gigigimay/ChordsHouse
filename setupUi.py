@@ -1,6 +1,6 @@
 from utilities.ui import renderSongItems, setCurrentSong, setCurrentTab, setCurrentSongListIndex, refreshAccountActions
 from actions import mainActions, lyricsDialogActions, chordsDialogActions, confirmDialogActions, chordsActions, \
-    commonActions, displayActions, accountActions, songActions
+    commonActions, displayActions, accountActions, songActions, loginDialogActions, registerDialogActions
 from service import get_songs_list
 from main import MainWindow, ChordsWindow, LyricsWindow, LoginDialog, RegisterDialog
 
@@ -95,7 +95,9 @@ def chordsHelpDialog(window):
 
 def loginDialog(window: LoginDialog):
     ui = window.ui
+    ui.registerButton.clicked.connect(loginDialogActions.onRegister(window))
 
 
 def registerDialog(window: RegisterDialog):
     ui = window.ui
+    ui.buttonBox.accepted.connect(registerDialogActions.onAccept(window))

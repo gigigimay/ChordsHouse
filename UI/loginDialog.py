@@ -41,7 +41,6 @@ class Ui_loginDialog(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.registerButton)
 
         self.retranslateUi(loginDialog)
-        self.buttonBox.accepted.connect(loginDialog.accept)
         self.buttonBox.rejected.connect(loginDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(loginDialog)
 

@@ -4,6 +4,7 @@ from utilities.connectDb import create_db_connection
 _db = create_db_connection()
 _songsCollection = _db.get_collection('Songs')
 _chordsCollection = _db.get_collection('Chords')
+_usersCollection = _db.get_collection('Users')
 
 
 def get_songs_list(sortby='title'):
@@ -71,6 +72,17 @@ def delete_chords(chordsId):
     print(f'deleted_count: {result.deleted_count}')
 
 
+def add_user(username, password):
+    result = _usersCollection.insert_one({'username': username, 'password': password})
+    print(f'inserted_id: {result.inserted_id}')
+    return result.inserted_id
+
+
+def check_username_used(username):
+    result = _usersCollection.find_one({'username': username})
+    return bool(result)
+
+
 if __name__ == '__main__':
-    p = get_songs_list()
+    p = check_username_used('gigigi')
     print(p)

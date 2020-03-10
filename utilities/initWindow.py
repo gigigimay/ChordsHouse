@@ -1,7 +1,7 @@
 from utilities.utils import getCurrentChordsData
 from utilities.text import getSongLabel, getInitialChords, addCopySuffix
 from constants import ARTIST_PLACEHOLDER, CHORDS_PLACEHOLDER
-from main import MainWindow
+from main import LoginDialog, RegisterDialog
 
 
 # ---------------------------- ui init ----------------------------
@@ -70,3 +70,23 @@ def initDeleteChordsDialog(window):
     currentChords = getCurrentChordsData(window.mainWindow.ui)
     chordName = currentChords['title'] or CHORDS_PLACEHOLDER
     ui.label.setText(f'Delete this chords?\n{label}\n\n" {chordName} "')
+
+
+def initLoginDialog(window: LoginDialog, username=''):
+    ui = window.ui
+    ui.usernameInput.setText(username)
+    ui.pwdInput.setText('')
+    if username:
+        ui.pwdInput.setFocus()
+    else:
+        ui.usernameInput.setFocus()
+    window.show()
+
+
+def initRegisterDialog(window: RegisterDialog):
+    ui = window.ui
+    ui.usernameInput.setText('')
+    ui.pwdInput.setText('')
+    ui.pwdInput2.setText('')
+    ui.usernameInput.setFocus()
+    window.show()
